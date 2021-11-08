@@ -1,7 +1,7 @@
-﻿<Application x:Class="FindAnnouncments.App"
+﻿<Application x:Class="FindAnnouncements.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:FindAnnouncments"
+             xmlns:local="clr-namespace:FindAnnouncements"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
