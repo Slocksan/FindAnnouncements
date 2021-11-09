@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace FindAnnouncements
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += (sender, args) =>
+            {
+                using (var context = new FindAnnouncementsModel())
+                {
+                    context.Roles.Load();
+                    RolesGrid.ItemsSource = context.Roles.Local.ToBindingList();
+                }
+            };
         }
     }
 }

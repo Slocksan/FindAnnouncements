@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:FindAnnouncements"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:FindAnnouncementsModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="RolesGrid" AutoGenerateColumns="False" ItemsSource="{Binding Roles.Local }" Height="419" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="RollId" Binding="{Binding RoleID}"
+                                    Header="ID роли" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="RollName" Binding="{Binding Role1}"
+                                    Header="название роли" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
