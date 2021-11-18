@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FindAnnouncements.Models;
 
 namespace FindAnnouncements
 {
@@ -23,13 +24,19 @@ namespace FindAnnouncements
     {
         public MainWindow()
         {
-            using(var context = new FindAnnouncementsModel())
-            {
-                context.Roles.Load();
-                context.Roles.Local.Add(new Role() { Role1 = "Пупа" });
+            //using(var context = new FindAnnouncementsModel())
+            //{
+            //    context.Roles.Load();
+            //    context.Roles.Local.Add(new Role() { Role1 = "Пупа" });
 
-                context.SaveChanges();
-            }
+            //    context.SaveChanges();
+            //}
+            AnnouncementService.GetAllAnnouncements();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            AnnouncementService.GetAllAnnouncements();
         }
     }
 }

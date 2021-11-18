@@ -8,6 +8,6 @@ namespace FindAnnouncements.Models
 {
     public class Journal
     {
-        // Journaling()
+        // Journaling() - добавление в таблицу новый лог о возникновении ошибки
     }
 }
