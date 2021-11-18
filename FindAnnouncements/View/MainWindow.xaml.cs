@@ -23,15 +23,13 @@ namespace FindAnnouncements
     {
         public MainWindow()
         {
-            InitializeComponent();
-            Loaded += (sender, args) =>
+            using(var context = new FindAnnouncementsModel())
             {
-                using (var context = new FindAnnouncementsModel())
-                {
-                    context.Roles.Load();
-                    RolesGrid.ItemsSource = context.Roles.Local.ToBindingList();
-                }
-            };
+                context.Roles.Load();
+                context.Roles.Local.Add(new Role() { Role1 = "Пупа" });
+
+                context.SaveChanges();
+            }
         }
     }
 }
