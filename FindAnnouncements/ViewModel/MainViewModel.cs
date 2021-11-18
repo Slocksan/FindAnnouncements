@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FindAnnouncements.Models
+namespace FindAnnouncements.ViewModel
 {
-    public class Journal
+    class MainViewModel
     {
-        // Journaling()
     }
 }

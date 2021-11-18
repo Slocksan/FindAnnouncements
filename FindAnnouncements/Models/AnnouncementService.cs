@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace FindAnnouncements.Models
 {
-    class AnnouncementService
+    public static class AnnouncementService
     {
 
         //AddAnnouncement()
 
-        //
+        //EditAnnouncement()
+
+        //DeleteAnnouncement()
     }
 }
