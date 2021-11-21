@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FindAnnouncements.ViewModel
 {
-    class RegistrationViewModel
+    class RegistrationViewModel : BaseViewModel
     {
     }
 }

@@ -4,15 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FindAnnouncements"
+        xmlns:views="clr-namespace:FindAnnouncements.View"
+        xmlns:viewModels="clr-namespace:FindAnnouncements.ViewModel"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="650" MinWidth="800" Height="650" Width="800">
     <Window.DataContext>
-        <local:FindAnnouncementsModel/>
+        <viewModels:MainViewModel/>
     </Window.DataContext>
-    <StackPanel>
-        <ContentControl Content="{Binding CurrentViewModel}">
-
-        </ContentControl>
-    </StackPanel>
+    <Grid>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"/>
+    </Grid>
 </Window>

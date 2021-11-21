@@ -26,8 +26,6 @@ namespace FindAnnouncements
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new MainViewModel();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

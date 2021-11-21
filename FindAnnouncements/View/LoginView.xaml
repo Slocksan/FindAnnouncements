@@ -6,7 +6,21 @@
              xmlns:local="clr-namespace:FindAnnouncements.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel VerticalAlignment="Center">
+        <StackPanel Width="300" Height="300">
+            <StackPanel HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label>Логин:</Label>
+                    <TextBox Width="200" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
+                    <Label>Пароль:</Label>
+                    <TextBox Width="200" FontSize="18"/>
+                </StackPanel>
+            </StackPanel>
+            <Button Width="200" Height="50" Content="Войти" Margin="50,20 50 0"/>
+            <Button Width="200" Height="50" Content="Зарегистрироваться" Margin="50,20 50 0"/>
+        </StackPanel>
+        <Button Width="200" Height="50" DockPanel.Dock="Bottom">Продолжить как гость</Button>
+    </StackPanel>
 </UserControl>
