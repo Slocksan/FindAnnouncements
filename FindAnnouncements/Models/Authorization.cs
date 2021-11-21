@@ -12,8 +12,10 @@ namespace FindAnnouncements.Models
 
         public User User { get; set; }
 
-        // Login - метод
+        // static Login - метод - проверка существования элемента юзера, возвращает IsAutorized
 
-        // Registrate - метод
+        // static Registrate - метод - новый юзер void
+
+        // Journaling() - добавление в таблицу новый лог о возникновении ошибки
     }
 }
