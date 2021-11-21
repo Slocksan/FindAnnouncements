@@ -10,11 +10,9 @@
     <Window.DataContext>
         <local:FindAnnouncementsModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        
-    </Grid>
+    <StackPanel>
+        <ContentControl Content="{Binding CurrentViewModel}">
+
+        </ContentControl>
+    </StackPanel>
 </Window>

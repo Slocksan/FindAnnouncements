@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace FindAnnouncements.ViewModel
 {
-    class MainViewModel
+    public class MainViewModel
     {
+        private BaseViewModel _currentViewModel;
+
+        public BaseViewModel CurrentViewModel
+        {
+            get => _currentViewModel;
+            set => _currentViewModel = value;
+        }
+
     }
 }
