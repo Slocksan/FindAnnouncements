@@ -52,7 +52,7 @@ namespace FindAnnouncements.Models
         }
 
         // static Registrate - метод - новый юзер void
-        public static void Registrate(User user)
+        public static Authorization Registrate(User user)
         {
             var authorization = new Authorization();
             using (var context = new FindAnnouncementsModel())
@@ -63,6 +63,7 @@ namespace FindAnnouncements.Models
                 {
                     if (user.Password.Length >= 6)
                     {
+                        authorization.User = user;
                         context.Users.Add(user);
                         context.SaveChanges();
                     }
@@ -79,6 +80,8 @@ namespace FindAnnouncements.Models
                     authorization.Description = "Ввод уже существующего логина";
                 }
             }
+
+            return authorization;
         }
 
 

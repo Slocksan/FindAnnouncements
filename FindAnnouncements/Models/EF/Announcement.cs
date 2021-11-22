@@ -10,7 +10,7 @@ namespace FindAnnouncements
     public partial class Announcement
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AnnounID { get; set; }
 
         [StringLength(30)]

@@ -10,7 +10,7 @@ namespace FindAnnouncements.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private BaseViewModel _currentViewModel = new LoginViewModel();
+        private BaseViewModel _currentViewModel = new RegistrationViewModel();
 
         public BaseViewModel CurrentViewModel
         {

@@ -16,7 +16,7 @@ namespace FindAnnouncements
             Logs = new HashSet<Log>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
 
         [StringLength(100)]
