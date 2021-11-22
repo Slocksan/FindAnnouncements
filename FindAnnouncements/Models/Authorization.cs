@@ -12,7 +12,7 @@ namespace FindAnnouncements.Models
         public User User { get; set; }
         public string ErrorMassage { get; set; }
         public string OperationType { get; set; }
-        public string ErrorDescription { get; set; }
+        public string Description { get; set; }
 
         // static Login - метод - проверка существования элемента юзера, возвращает IsAutorized
         public static Authorization Login(User user)
@@ -22,24 +22,29 @@ namespace FindAnnouncements.Models
             {
                 var foundUsers = context.Users.Where(p => p.Login == user.Login).ToArray();
 
-                authorization.User = foundUsers.First();
                 if (foundUsers.Count() == 1)
                 {
-                    if (authorization.User.Password == foundUsers[0].Password)
+                    authorization.User = foundUsers.First();
+                    if (user.Password == foundUsers[0].Password)
+                    {
                         authorization.IsAutorized = true;
+                        authorization.OperationType = "Авторизация";
+                        authorization.Description = "Вход в систему";
+                    }
                     else
                     {
+                        authorization.IsAutorized = false;
                         authorization.OperationType = "Авторизация";
-                        authorization.ErrorMassage = "Такого имени пользователя не существует.";
-                        authorization.ErrorDescription = "Неверное имя пользователя";
+                        authorization.ErrorMassage = "Неверный пароль. Попробуйте снова.";
+                        authorization.Description = "Неверный пароль";
                     }
                 }
                 else
                 {
                     authorization.IsAutorized = false;
                     authorization.OperationType = "Авторизация";
-                    authorization.ErrorMassage = "Неверный пароль. Попробуйте снова.";
-                    authorization.ErrorDescription = "Неверный пароль";
+                    authorization.ErrorMassage = "Такого имени пользователя не существует.";
+                    authorization.Description = "Неверное имя пользователя";
                 }
                 return authorization;
             }
@@ -47,7 +52,7 @@ namespace FindAnnouncements.Models
         }
 
         // static Registrate - метод - новый юзер void
-        public void Registrate(User user)
+        public static void Registrate(User user)
         {
             var authorization = new Authorization();
             using (var context = new FindAnnouncementsModel())
@@ -65,30 +70,30 @@ namespace FindAnnouncements.Models
                     {
                         authorization.OperationType = "Регистрация";
                         authorization.ErrorMassage = "Введенный пароль слишком короткий";
-                        authorization.ErrorDescription = "Ошибка ввода пароля";
+                        authorization.Description = "Ошибка ввода пароля";
                     }
                 }
                 else
                 {
                     authorization.ErrorMassage = "Пользователь с таким логином уже существует";
-                    authorization.ErrorDescription = "Ввод уже существующего логина";
+                    authorization.Description = "Ввод уже существующего логина";
                 }
             }
         }
 
 
         // Journaling() - добавление в таблицу новый лог о возникновении ошибки
-        public void Journaling(User user, Authorization authorization)
+        public static void Journaling(Authorization authorization)
         {
-                if (authorization.ErrorMassage != null)
+            if (authorization.ErrorMassage != null)
+            {
+                var log = new Log();
+                using (var context = new FindAnnouncementsModel())
                 {
-                    var log = new Log();
-                    using (var context = new FindAnnouncementsModel())
-                    {
-                    log.User = user;
+                    log.UserID = authorization.User.UserID;
                     log.Date = DateTime.Now;
                     log.Operation = authorization.OperationType;
-                    log.Description = authorization.ErrorDescription;
+                    log.Description = authorization.Description;
                     context.Logs.Add(log);
                     context.SaveChanges();
                 }

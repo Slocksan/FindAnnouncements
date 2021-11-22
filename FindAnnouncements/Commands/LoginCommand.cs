@@ -31,10 +31,12 @@ namespace FindAnnouncements.Commands
             if (_loginViewModel.Authorization.IsAutorized)
             {
                 MessageBox.Show("Все ок, проходи");
+                Authorization.Journaling(_loginViewModel.Authorization);
             }
             else
             {
                 MessageBox.Show(_loginViewModel.Authorization.ErrorMassage);
+                if (!(_loginViewModel.Authorization.User is null)) Authorization.Journaling(_loginViewModel.Authorization);
             }
         }
     }
