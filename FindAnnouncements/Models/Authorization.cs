@@ -8,7 +8,7 @@ namespace FindAnnouncements.Models
 {
     class Authorization
     {
-        public static bool IsAutorized { get; set; }
+        public bool IsAutorized { get; set; }
         public User User { get; set; }
         public string ErrorMassage { get; set; }
         public string OperationType { get; set; }
@@ -21,10 +21,12 @@ namespace FindAnnouncements.Models
             using (var context = new FindAnnouncementsModel())
             {
                 var foundUsers = context.Users.Where(p => p.Login == user.Login).ToArray();
+
+                authorization.User = foundUsers.First();
                 if (foundUsers.Count() == 1)
                 {
                     if (authorization.User.Password == foundUsers[0].Password)
-                        IsAutorized = true;
+                        authorization.IsAutorized = true;
                     else
                     {
                         authorization.OperationType = "Авторизация";
@@ -34,7 +36,7 @@ namespace FindAnnouncements.Models
                 }
                 else
                 {
-                    IsAutorized = false;
+                    authorization.IsAutorized = false;
                     authorization.OperationType = "Авторизация";
                     authorization.ErrorMassage = "Неверный пароль. Попробуйте снова.";
                     authorization.ErrorDescription = "Неверный пароль";

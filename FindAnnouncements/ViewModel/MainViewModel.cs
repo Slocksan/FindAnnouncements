@@ -18,8 +18,6 @@ namespace FindAnnouncements.ViewModel
             set
             {
                 _currentViewModel = value;
-                _currentViewModel.MainModel = this;
-                OnPropertyChanged(nameof(CurrentViewModel));
             } 
         }
 
@@ -27,7 +25,6 @@ namespace FindAnnouncements.ViewModel
 
         public MainViewModel()
         {
-            UpdateViewCommand = new UpdateViewCommand(this);
         }
     }
 }

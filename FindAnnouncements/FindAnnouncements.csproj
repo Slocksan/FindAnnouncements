@@ -67,11 +67,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\EF\Role.cs" />
     <Compile Include="Models\EF\User.cs" />
+    <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModel\AnnouncemetsDeskViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -100,7 +102,6 @@
     </Compile>
     <Compile Include="Models\EF\FindAnnouncements.cs" />
     <Compile Include="Models\EF\Log.cs" />
-    <Compile Include="Models\Journal.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

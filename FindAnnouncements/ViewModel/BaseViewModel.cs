@@ -9,8 +9,6 @@ namespace FindAnnouncements.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public BaseViewModel MainModel { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
