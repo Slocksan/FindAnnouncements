@@ -85,18 +85,15 @@ namespace FindAnnouncements.Models
         // Journaling() - добавление в таблицу новый лог о возникновении ошибки
         public static void Journaling(Authorization authorization)
         {
-            if (authorization.ErrorMassage != null)
+            var log = new Log();
+            using (var context = new FindAnnouncementsModel())
             {
-                var log = new Log();
-                using (var context = new FindAnnouncementsModel())
-                {
-                    log.UserID = authorization.User.UserID;
-                    log.Date = DateTime.Now;
-                    log.Operation = authorization.OperationType;
-                    log.Description = authorization.Description;
-                    context.Logs.Add(log);
-                    context.SaveChanges();
-                }
+                log.UserID = authorization.User.UserID;
+                log.Date = DateTime.Now;
+                log.Operation = authorization.OperationType;
+                log.Description = authorization.Description;
+                context.Logs.Add(log);
+                context.SaveChanges();
             }
         }
     }

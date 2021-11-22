@@ -9,7 +9,7 @@ namespace FindAnnouncements
     [Table("Log")]
     public partial class Log
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LogID { get; set; }
 
         public int UserID { get; set; }
