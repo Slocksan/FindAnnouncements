@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegistrateCommand.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />

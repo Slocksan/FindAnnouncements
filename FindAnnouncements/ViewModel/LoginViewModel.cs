@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Models;
+using FindAnnouncements.Stores;
 
 namespace FindAnnouncements.ViewModel
 {
@@ -46,8 +47,12 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel()
+        public ICommand RegistrationCommand { get; }
+
+        public LoginViewModel(NavigationStore navigationStore, Func<RegistrationViewModel> createRegistrationViewModel)
         {
+            RegistrationCommand = new NavigateCommand(navigationStore, createRegistrationViewModel);
+
             LoginCommand = new LoginCommand(this);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,24 @@ namespace FindAnnouncements.Commands
         public LoginCommand(LoginViewModel loginViewModel)
         {
             _loginViewModel = loginViewModel;
+
+            _loginViewModel.PropertyChanged += LoginViewModelOnPropertyChanged;
+        }
+
+        private void LoginViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LoginViewModel.Username)
+            || e.PropertyName == nameof(LoginViewModel.Password))
+            {
+                OnCanExecutedChanged();
+            }
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !(string.IsNullOrEmpty(_loginViewModel.Username)) &&
+                     !(string.IsNullOrEmpty(_loginViewModel.Password)) && 
+                     base.CanExecute(parameter);
         }
 
         public override void Execute(object parameter)

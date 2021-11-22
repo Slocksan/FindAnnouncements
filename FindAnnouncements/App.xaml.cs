@@ -15,11 +15,8 @@ namespace FindAnnouncements
     /// </summary>
     public partial class App : Application
     {
-        private readonly NavigationStore _navigationStore;
-
         public App()
         {
-            _navigationStore = new NavigationStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -34,7 +34,7 @@ namespace FindAnnouncements.Commands
             }
             else
             {
-                MessageBox.Show("Вы зарегистрированы");
+                MessageBox.Show("Теперь вы зарегистрированы");
             }
         }
 

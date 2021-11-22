@@ -69,7 +69,6 @@ namespace FindAnnouncements.Models
                     }
                     else
                     {
-                        authorization.OperationType = "Регистрация";
                         authorization.ErrorMassage = "Введенный пароль слишком короткий";
                         authorization.Description = "Ошибка ввода пароля";
                     }
