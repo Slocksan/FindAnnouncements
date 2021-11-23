@@ -27,9 +27,9 @@
                     <ComboBoxItem Content="Дата находки раньше"/>
                 </ComboBox>
                 <Button DockPanel.Dock="Left" Height="30" Width="100" Content="Фильтры" FontSize="16" Margin="20 0 0 0"/>
-                <Button DockPanel.Dock="Right" Height="30" Width="100" Content="Обновить" FontSize="16" Margin="0 0 20 0"/>
+                <Button DockPanel.Dock="Right" Height="30" Width="100" Content="Обновить" FontSize="16" Margin="0 0 20 0" Command="{Binding UpdateAnnouncementsCommand}"/>
             </DockPanel>
-            <DataGrid Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
+            <DataGrid SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Имя" Width="175" 
                                         Binding="{Binding AnimalName}"/>
@@ -44,7 +44,7 @@
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock/>
-                <Button Grid.Column="0" Height="30" Width="100" Content="Войти" FontSize="16" Visibility="{Binding !Authorization.IsAutorized, Converter={StaticResource BoolToVis}}"/>
+                <Button Grid.Column="0" Height="30" Width="100" Content="Войти" FontSize="16" Command="{Binding LoginCommand}" Visibility="{Binding !Authorization.IsAutorized, Converter={StaticResource BoolToVis}}"/>
                 <Button Grid.Column="1" Height="30" Width="200" Content="Добавить объявление" FontSize="16" IsEnabled="{Binding Authorization.IsAutorized}"/>
                 <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding Authorization.IsAutorized}"/>
             </Grid>
@@ -73,14 +73,24 @@
                 <Label Content="Дата публикации:" FontSize="16"/>
                 <Label Content="{Binding Path=SelectedItem.PublishDate, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <Label Content="Место нахождения:" FontSize="16"/>
-                <TextBlock Text="{Binding Path=SelectedItem.Location, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <Label Content="Описание:" FontSize="16"/>
-                <TextBlock Text="{Binding Path=SelectedItem.Discription, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16"/>
-            </StackPanel>
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Место нахождения:" FontSize="16" TextWrapping="Wrap" Margin="5 0 0 0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=SelectedItem.Location, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16" Margin="10"/>
+            </Grid>
+                
+
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Описание:" FontSize="16"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=SelectedItem.Discription, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16" Margin="10"/>
+            </Grid>
         </DockPanel>
     </Grid>
 </UserControl>

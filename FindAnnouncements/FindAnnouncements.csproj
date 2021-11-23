@@ -71,6 +71,7 @@
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegistrateCommand.cs" />
+    <Compile Include="Commands\UpdateAnnouncementsCommand.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\EF\Role.cs" />
