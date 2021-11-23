@@ -21,6 +21,6 @@
             <Button Width="200" Height="50" Content="Войти" Margin="50,20 50 0" FontSize="18" Command="{Binding LoginCommand}"/>
             <Button Width="200" Height="50" Content="Зарегистрироваться" Margin="50,20 50 0" FontSize="18" Command="{Binding RegistrationCommand}"/>
         </StackPanel>
-        <Button Width="200" Height="50" DockPanel.Dock="Bottom" FontSize="18">Продолжить как гость</Button>
+        <Button Width="200" Height="50" DockPanel.Dock="Bottom" FontSize="18" Command="{Binding GuestCommand}">Продолжить как гость</Button>
     </StackPanel>
 </UserControl>

@@ -11,11 +11,11 @@
             <StackPanel HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Label FontSize="18">Логин:</Label>
-                    <TextBox Width="200" FontSize="18" Text="{Binding Username}"/>
+                    <TextBox Width="200" FontSize="18" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
                     <Label FontSize="18">Пароль:</Label>
-                    <TextBox Width="200" FontSize="18" Text="{Binding Password}"/>
+                    <TextBox Width="200" FontSize="18" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
                     <Label FontSize="18">Имя:</Label>
@@ -40,7 +40,7 @@
             </StackPanel>
             <Button Width="200" Height="50" Content="Зарегистрироваться" Margin="50,20 50 0" FontSize="18" Command="{Binding RegistrateCommand}"/>
             <Button Width="250" Height="50" Content="Я уже зарегистрирован" Margin="50,20 50 0" FontSize="18" Command="{Binding LoginCommand}"/>
-            <Button Width="250" Height="50" Content="Продолжить как гость" Margin="50,20 50 0" FontSize="18"/>
+            <Button Width="250" Height="50" Content="Продолжить как гость" Margin="50,20 50 0" FontSize="18" Command="{Binding GuestCommand}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

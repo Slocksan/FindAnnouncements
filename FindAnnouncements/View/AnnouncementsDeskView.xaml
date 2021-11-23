@@ -5,8 +5,82 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FindAnnouncements.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="900">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
     <Grid>
-        <Label FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center">Announcements Desk</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2.8*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" LastChildFill="False">
+                <Label Content="Сортировка" Height="40" FontSize="16" Margin="20 0 10 0" DockPanel.Dock="Left"/>
+                <ComboBox Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left">
+                    <ComboBoxItem Content="Дата находки позже"/>
+                    <ComboBoxItem Content="Дата находки раньше"/>
+                </ComboBox>
+                <Button DockPanel.Dock="Left" Height="30" Width="100" Content="Фильтры" FontSize="16" Margin="20 0 0 0"/>
+                <Button DockPanel.Dock="Right" Height="30" Width="100" Content="Обновить" FontSize="16" Margin="0 0 20 0"/>
+            </DockPanel>
+            <DataGrid Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Width="175" 
+                                        Binding="{Binding AnimalName}"/>
+                    <DataGridTextColumn Header="Тип" Width="175" 
+                                        Binding="{Binding AnimalCategory}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock/>
+                <Button Grid.Column="0" Height="30" Width="100" Content="Войти" FontSize="16" Visibility="{Binding !Authorization.IsAutorized, Converter={StaticResource BoolToVis}}"/>
+                <Button Grid.Column="1" Height="30" Width="200" Content="Добавить объявление" FontSize="16" IsEnabled="{Binding Authorization.IsAutorized}"/>
+                <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding Authorization.IsAutorized}"/>
+            </Grid>
+        </Grid>
+        <DockPanel Grid.Column="1" LastChildFill="False">
+            <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
+                   Height="40" DockPanel.Dock="Top"/>
+            <Image Margin="20" DockPanel.Dock="Top"/>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Имя:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.AnimalName, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Вид:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.AnimalCategory, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Пол:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.Gender, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Чипирован:" FontSize="16"/>
+                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding Path=SelectedItem.Chiped, ElementName=AnnouncementsDataGrid}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Дата публикации:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.PublishDate, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Место нахождения:" FontSize="16"/>
+                <TextBlock Text="{Binding Path=SelectedItem.Location, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Описание:" FontSize="16"/>
+                <TextBlock Text="{Binding Path=SelectedItem.Discription, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

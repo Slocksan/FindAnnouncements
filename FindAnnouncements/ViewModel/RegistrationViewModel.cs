@@ -123,11 +123,15 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand LoginCommand { get; }
 
-        public RegistrationViewModel(NavigationStore navigationStore, Func<LoginViewModel> createLoginViewModel)
+        public ICommand GuestCommand { get; }
+
+        public RegistrationViewModel(NavigationStore navigationStore, Func<LoginViewModel> createLoginViewModel, Func<AnnouncemetsDeskViewModel> createGuestAnnouncemetsDeskViewModel)
         {
             RegistrateCommand = new RegistrateCommand(this);
 
             LoginCommand = new NavigateCommand(navigationStore, createLoginViewModel);
+
+            GuestCommand = new NavigateCommand(navigationStore, createGuestAnnouncemetsDeskViewModel);
         }
     }
 }

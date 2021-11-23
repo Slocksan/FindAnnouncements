@@ -39,6 +39,9 @@ namespace FindAnnouncements
         [StringLength(100)]
         public string Location { get; set; }
 
+        [StringLength(200)]
+        public string Discription { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime PublishDate { get; set; }
 

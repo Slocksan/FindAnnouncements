@@ -9,7 +9,6 @@ namespace FindAnnouncements.Models
 {
     public static class AnnouncementService
     {
-
         public static void AddAnnouncement(Announcement announcementToAdd)
         {
             using (var context = new FindAnnouncementsModel())

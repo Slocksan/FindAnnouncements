@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,24 @@ namespace FindAnnouncements.Commands
         public RegistrateCommand(RegistrationViewModel registrationViewModel)
         {
             _registrationViewModel = registrationViewModel;
+
+            _registrationViewModel.PropertyChanged += RegistrationViewModelOnPropertyChanged;
+        }
+
+        private void RegistrationViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LoginViewModel.Username)
+                || e.PropertyName == nameof(LoginViewModel.Password))
+            {
+                OnCanExecutedChanged();
+            }
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !(string.IsNullOrEmpty(_registrationViewModel.Username)) &&
+                   !(string.IsNullOrEmpty(_registrationViewModel.Password)) &&
+                   base.CanExecute(parameter);
         }
     }
 }
