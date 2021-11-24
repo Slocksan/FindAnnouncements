@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FindAnnouncements.View"
+             xmlns:converters="clr-namespace:FindAnnouncements.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="900">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <converters:InvertBoolToVisConverter x:Key="InvertBoolToVisConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -44,9 +46,9 @@
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock/>
-                <Button Grid.Column="0" Height="30" Width="100" Content="Войти" FontSize="16" Command="{Binding LoginCommand}" Visibility="{Binding !Authorization.IsAutorized, Converter={StaticResource BoolToVis}}"/>
-                <Button Grid.Column="1" Height="30" Width="200" Content="Добавить объявление" FontSize="16" IsEnabled="{Binding Authorization.IsAutorized}"/>
-                <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding Authorization.IsAutorized}"/>
+                <Button Grid.Column="0" Height="30" Width="100" Content="Войти" FontSize="16" Command="{Binding LoginCommand}" Visibility="{Binding AuthorizationStore.ActualAuthorization.IsAutorized, Converter={StaticResource InvertBoolToVisConverter}}"/>
+                <Button Grid.Column="1" Height="30" Width="200" Content="Добавить объявление" FontSize="16" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
+                <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
             </Grid>
         </Grid>
         <DockPanel Grid.Column="1" LastChildFill="False">

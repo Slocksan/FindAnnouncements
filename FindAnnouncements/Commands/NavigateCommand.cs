@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 using FindAnnouncements.ViewModel;
 
@@ -10,18 +11,16 @@ namespace FindAnnouncements.Commands
 {
     class NavigateCommand : CommandBase
     {
-        private readonly NavigationStore _navigationStore;
-        private readonly Func<BaseViewModel> _createViewModel;
+        private readonly NavigationService _navigationService;
 
-        public NavigateCommand(NavigationStore navigationStore, Func<BaseViewModel> createViewModel)
+        public NavigateCommand(NavigationService navigationService)
         {
-            _navigationStore = navigationStore;
-            _createViewModel = createViewModel;
+            _navigationService = navigationService;
         }
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = _createViewModel();
+            _navigationService.Navigate();
         }
     }
 }

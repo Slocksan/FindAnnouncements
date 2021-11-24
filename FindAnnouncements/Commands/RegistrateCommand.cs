@@ -6,13 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using FindAnnouncements.Models;
+using FindAnnouncements.Services;
+using FindAnnouncements.Stores;
 using FindAnnouncements.ViewModel;
 
 namespace FindAnnouncements.Commands
 {
     class RegistrateCommand : CommandBase
     {
+        private readonly AuthorizationStore _authorizationStore;
         private readonly RegistrationViewModel _registrationViewModel;
+        private readonly NavigationService _announcementsDeskNavigationService;
 
         public override void Execute(object parameter)
         {
@@ -27,21 +31,23 @@ namespace FindAnnouncements.Commands
                 RoleID = 3
             };
 
-            _registrationViewModel.Authorization = Authorization.Registrate(userToRegistrate);
+            _authorizationStore.ActualAuthorization = Authorization.Registrate(userToRegistrate);
 
-            if (!(_registrationViewModel.Authorization.User is null))
+            if (!(_authorizationStore.ActualAuthorization.User is null))
             {
-                MessageBox.Show(_registrationViewModel.Authorization.ErrorMassage);
+                MessageBox.Show(_authorizationStore.ActualAuthorization.ErrorMassage);
             }
             else
             {
-                MessageBox.Show("Теперь вы зарегистрированы");
+                _announcementsDeskNavigationService.Navigate();
             }
         }
 
-        public RegistrateCommand(RegistrationViewModel registrationViewModel)
+        public RegistrateCommand(AuthorizationStore authorizationStore, RegistrationViewModel registrationViewModel, NavigationService announcementsDeskNavigationService)
         {
+            _authorizationStore = authorizationStore;
             _registrationViewModel = registrationViewModel;
+            _announcementsDeskNavigationService = announcementsDeskNavigationService;
 
             _registrationViewModel.PropertyChanged += RegistrationViewModelOnPropertyChanged;
         }

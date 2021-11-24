@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Models;
+using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
 namespace FindAnnouncements.ViewModel
 {
     class LoginViewModel : BaseViewModel
     {
-        public Authorization Authorization { get; set; }
 
         private string _username;
 
@@ -51,13 +51,14 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand GuestCommand { get; }
 
-        public LoginViewModel(NavigationStore navigationStore, Func<RegistrationViewModel> createRegistrationViewModel, Func<AnnouncemetsDeskViewModel> createGuestAnnouncmentsDeskViewModel)
+        public LoginViewModel(AuthorizationStore authorizationStore ,NavigationService registrationNavigationService,
+            NavigationService announcementsDeskNavigationService)
         {
-            RegistrationCommand = new NavigateCommand(navigationStore, createRegistrationViewModel);
+            RegistrationCommand = new NavigateCommand(registrationNavigationService);
 
-            GuestCommand = new NavigateCommand(navigationStore, createGuestAnnouncmentsDeskViewModel);
+            GuestCommand = new NavigateCommand(announcementsDeskNavigationService);
 
-            LoginCommand = new LoginCommand(this);
+            LoginCommand = new LoginCommand(this, authorizationStore, announcementsDeskNavigationService);
         }
     }
 }

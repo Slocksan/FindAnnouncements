@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Models;
+using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
 namespace FindAnnouncements.ViewModel
 {
     class RegistrationViewModel : BaseViewModel
     {
-        public Authorization Authorization { get; set; }
+        private readonly AuthorizationStore _authorizationStore;
 
         private string _username;
 
@@ -125,13 +126,15 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand GuestCommand { get; }
 
-        public RegistrationViewModel(NavigationStore navigationStore, Func<LoginViewModel> createLoginViewModel, Func<AnnouncemetsDeskViewModel> createGuestAnnouncemetsDeskViewModel)
+        public RegistrationViewModel(AuthorizationStore authorizationStore, NavigationService loginNavigationService, NavigationService announcementsDeskNavigationService)
         {
-            RegistrateCommand = new RegistrateCommand(this);
+            RegistrateCommand = new RegistrateCommand(authorizationStore, this, announcementsDeskNavigationService);
 
-            LoginCommand = new NavigateCommand(navigationStore, createLoginViewModel);
+            LoginCommand = new NavigateCommand(loginNavigationService);
 
-            GuestCommand = new NavigateCommand(navigationStore, createGuestAnnouncemetsDeskViewModel);
+            GuestCommand = new NavigateCommand(announcementsDeskNavigationService);
+
+            _authorizationStore = authorizationStore;
         }
     }
 }

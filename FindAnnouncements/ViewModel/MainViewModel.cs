@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Models;
+using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
 namespace FindAnnouncements.ViewModel
@@ -13,15 +14,16 @@ namespace FindAnnouncements.ViewModel
     public class MainViewModel : BaseViewModel
     {
         private readonly NavigationStore _navigationStore;
-        private readonly Authorization _authorization;
+        private readonly AuthorizationStore _authorizationStore;
 
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
         public MainViewModel()
         {
             _navigationStore = new NavigationStore();
-            _authorization = new Authorization() {IsAutorized = false};
+            _authorizationStore = new AuthorizationStore();
 
+            _authorizationStore.ActualAuthorization = new Authorization() { IsAutorized = false };
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             _navigationStore.CurrentViewModel = createLoginViewModel();
@@ -34,17 +36,18 @@ namespace FindAnnouncements.ViewModel
 
         private RegistrationViewModel createRegistrationViewModel()
         {
-            return new RegistrationViewModel(_navigationStore, createLoginViewModel, createGuestAnnouncemetsDeskViewModel);
+            return new RegistrationViewModel(_authorizationStore, new NavigationService(_navigationStore, createLoginViewModel), new NavigationService(_navigationStore, createAnnouncemetsDeskViewModel));
         }
 
         private LoginViewModel createLoginViewModel()
         {
-            return new LoginViewModel(_navigationStore, createRegistrationViewModel, createGuestAnnouncemetsDeskViewModel);
+            return new LoginViewModel(_authorizationStore, new NavigationService(_navigationStore, createRegistrationViewModel),
+                new NavigationService(_navigationStore, createAnnouncemetsDeskViewModel));
         }
 
-        private AnnouncemetsDeskViewModel createGuestAnnouncemetsDeskViewModel()
+        private AnnouncemetsDeskViewModel createAnnouncemetsDeskViewModel()
         {
-            return new AnnouncemetsDeskViewModel(_navigationStore, _authorization);
+            return new AnnouncemetsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, createLoginViewModel));
         }
     }
 }

@@ -3,23 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using FindAnnouncements.Commands;
 using FindAnnouncements.Models;
+using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
 namespace FindAnnouncements.ViewModel
 {
     class AnnouncemetsDeskViewModel : BaseViewModel
     {
-        private readonly NavigationStore _navigationStore;
-        public Authorization Authorization { get; set; }
+        public AuthorizationStore AuthorizationStore { get; }
 
-        public List<Announcement> Announcements { get; set; } =
-            AnnouncementService.GetAllAnnouncements().Where(e => e.UserID == 1).ToList();
+        private List<Announcement> _announcements;
 
-        public AnnouncemetsDeskViewModel(NavigationStore navigationStore, Authorization authorization)
+        public List<Announcement> Announcements {
+            get
+            {
+                return _announcements;
+            }
+            set
+            {
+                _announcements = value;
+                OnPropertyChanged(nameof(Announcements));
+            }
+        }
+
+
+        public ICommand LoginCommand { get; }
+
+        public ICommand UpdateAnnouncementsCommand { get; }
+
+        public AnnouncemetsDeskViewModel(AuthorizationStore authorizationStore, NavigationService LoginNavigationService)
         {
-            _navigationStore = navigationStore;
-            Authorization = authorization;
+            UpdateAnnouncementsCommand = new UpdateAnnouncementsCommand(this);
+            LoginCommand = new NavigateCommand(LoginNavigationService);
+            this.AuthorizationStore = authorizationStore;
+
+            UpdateAnnouncementsCommand.Execute(null);
         }
     }
 }
