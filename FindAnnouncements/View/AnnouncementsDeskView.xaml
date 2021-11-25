@@ -33,9 +33,13 @@
             </DockPanel>
             <DataGrid SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Имя" Width="175" 
+                    <DataGridTextColumn CanUserResize="False" CanUserSort="False" 
+                                        CanUserReorder="False" 
+                                        Header="Имя" Width="175" 
                                         Binding="{Binding AnimalName}"/>
-                    <DataGridTextColumn Header="Тип" Width="175" 
+                    <DataGridTextColumn CanUserSort="False" 
+                                        CanUserResize ="False" 
+                                        CanUserReorder ="False" Header="Тип" Width="175" 
                                         Binding="{Binding AnimalCategory}"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -51,7 +55,7 @@
                 <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
             </Grid>
         </Grid>
-        <DockPanel Grid.Column="1" LastChildFill="False" >
+        <DockPanel Grid.Column="1" LastChildFill="False" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }" >
             <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
                    Height="40" DockPanel.Dock="Top"/>
             <Image Margin="20" DockPanel.Dock="Top"/>

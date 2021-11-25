@@ -13,7 +13,6 @@ namespace FindAnnouncements.ViewModel
 {
     class RegistrationViewModel : BaseViewModel
     {
-        private readonly AuthorizationStore _authorizationStore;
 
         private string _username;
 
@@ -134,7 +133,6 @@ namespace FindAnnouncements.ViewModel
 
             GuestCommand = new NavigateCommand(announcementsDeskNavigationService);
 
-            _authorizationStore = authorizationStore;
         }
     }
 }
