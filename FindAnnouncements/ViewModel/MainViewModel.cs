@@ -21,12 +21,14 @@ namespace FindAnnouncements.ViewModel
         public MainViewModel()
         {
             _navigationStore = new NavigationStore();
-            _authorizationStore = new AuthorizationStore();
+            _authorizationStore = new AuthorizationStore
+            {
+                ActualAuthorization = new Authorization() { IsAutorized = false }
+            };
 
-            _authorizationStore.ActualAuthorization = new Authorization() { IsAutorized = false };
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
-            _navigationStore.CurrentViewModel = createLoginViewModel();
+            _navigationStore.CurrentViewModel = CreateLoginViewModel();
         }
 
         private void OnCurrentViewModelChanged()
@@ -34,20 +36,20 @@ namespace FindAnnouncements.ViewModel
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 
-        private RegistrationViewModel createRegistrationViewModel()
+        private RegistrationViewModel CreateRegistrationViewModel()
         {
-            return new RegistrationViewModel(_authorizationStore, new NavigationService(_navigationStore, createLoginViewModel), new NavigationService(_navigationStore, createAnnouncemetsDeskViewModel));
+            return new RegistrationViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateLoginViewModel), new NavigationService(_navigationStore, CreateAnnouncementsDeskViewModel));
         }
 
-        private LoginViewModel createLoginViewModel()
+        private LoginViewModel CreateLoginViewModel()
         {
-            return new LoginViewModel(_authorizationStore, new NavigationService(_navigationStore, createRegistrationViewModel),
-                new NavigationService(_navigationStore, createAnnouncemetsDeskViewModel));
+            return new LoginViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateRegistrationViewModel),
+                new NavigationService(_navigationStore, CreateAnnouncementsDeskViewModel));
         }
 
-        private AnnouncemetsDeskViewModel createAnnouncemetsDeskViewModel()
+        private AnnouncemetsDeskViewModel CreateAnnouncementsDeskViewModel()
         {
-            return new AnnouncemetsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, createLoginViewModel));
+            return new AnnouncemetsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateLoginViewModel));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,11 @@ namespace FindAnnouncements.Commands
         public UpdateAnnouncementsCommand(AnnouncemetsDeskViewModel announcemetsDeskViewModel)
         {
             _announcemetsDeskViewModel = announcemetsDeskViewModel;
-            
+        }
+
+        public void CheckCanExecute(object sender, PropertyChangedEventArgs e)
+        {
+            OnCanExecutedChanged();
         }
     }
 }

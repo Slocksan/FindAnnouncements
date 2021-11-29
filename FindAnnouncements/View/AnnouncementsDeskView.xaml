@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="FindAnnouncements.View.AnnouncementsDesk"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FindAnnouncements.View"
@@ -51,7 +52,22 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock/>
                 <Button Grid.Column="0" Height="30" Width="100" Content="Войти" FontSize="16" Command="{Binding LoginCommand}" Visibility="{Binding AuthorizationStore.ActualAuthorization.IsAutorized, Converter={StaticResource InvertBoolToVisConverter}}"/>
-                <Button Grid.Column="1" Height="30" Width="200" Content="Добавить объявление" FontSize="16" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
+                <Button Grid.Column="1" Height="30" Width="200" Content="Добавить объявление" FontSize="16" Command="{Binding CreateAnnouncementCommand}" CommandParameter="{Binding SelectedItem, ElementName=AnnouncementsDataGrid}">
+                    <Button.Style>
+                        <Style>
+                            <Setter Property="Control.IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}" Value="true"/>
+                                        <Condition Binding="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid}" Value="false"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Control.IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
             </Grid>
         </Grid>
@@ -87,8 +103,6 @@
                 <TextBlock Grid.Column="0" Text="Место нахождения:" FontSize="16" TextWrapping="Wrap" Margin="5 0 0 0"/>
                 <TextBlock Grid.Column="1" Text="{Binding Path=SelectedItem.Location, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16" Margin="10"/>
             </Grid>
-                
-
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

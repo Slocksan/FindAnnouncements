@@ -31,11 +31,12 @@ namespace FindAnnouncements.Commands
                 RoleID = 3
             };
 
-            _authorizationStore.ActualAuthorization = Authorization.Registrate(userToRegistrate);
+            var userAuthorization = Authorization.Registrate(userToRegistrate);
 
-            if (!(_authorizationStore.ActualAuthorization.User is null))
+            if (userAuthorization.IsAutorized)
             {
-                MessageBox.Show(_authorizationStore.ActualAuthorization.ErrorMassage);
+                _authorizationStore.ActualAuthorization = userAuthorization;
+                MessageBox.Show(userAuthorization.ErrorMassage);
             }
             else
             {
@@ -52,6 +53,13 @@ namespace FindAnnouncements.Commands
             _registrationViewModel.PropertyChanged += RegistrationViewModelOnPropertyChanged;
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return !string.IsNullOrEmpty(_registrationViewModel.Username) &&
+                   !string.IsNullOrEmpty(_registrationViewModel.Password) &&
+                   base.CanExecute(parameter);
+        }
+
         private void RegistrationViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(LoginViewModel.Username)
@@ -59,13 +67,6 @@ namespace FindAnnouncements.Commands
             {
                 OnCanExecutedChanged();
             }
-        }
-
-        public override bool CanExecute(object parameter)
-        {
-            return !(string.IsNullOrEmpty(_registrationViewModel.Username)) &&
-                   !(string.IsNullOrEmpty(_registrationViewModel.Password)) &&
-                   base.CanExecute(parameter);
         }
     }
 }

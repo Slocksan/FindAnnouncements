@@ -16,14 +16,14 @@ namespace FindAnnouncements.Commands
     {
         private readonly LoginViewModel _loginViewModel;
         private readonly AuthorizationStore _authorizationStore;
-        private readonly NavigationService _announcementsDesknavigationService;
+        private readonly NavigationService _announcementsDeskNavigationService;
 
         public LoginCommand(LoginViewModel loginViewModel, AuthorizationStore authorizationStore,
-            NavigationService AnnouncementsDesknavigationService)
+            NavigationService announcementsDeskNavigationService)
         {
             _authorizationStore = authorizationStore;
             _loginViewModel = loginViewModel;
-            _announcementsDesknavigationService = AnnouncementsDesknavigationService;
+            _announcementsDeskNavigationService = announcementsDeskNavigationService;
 
             _loginViewModel.PropertyChanged += LoginViewModelOnPropertyChanged;
         }
@@ -52,17 +52,18 @@ namespace FindAnnouncements.Commands
                 Password = _loginViewModel.Password
             };
 
-            _authorizationStore.ActualAuthorization = Authorization.Login(userToLogin);
+            var userAuthorization = Authorization.Login(userToLogin);
 
-            if (_authorizationStore.ActualAuthorization.IsAutorized)
+            if (userAuthorization.IsAutorized)
             {
-                Authorization.Journaling(_authorizationStore.ActualAuthorization);
-                _announcementsDesknavigationService.Navigate();
+                _authorizationStore.ActualAuthorization = userAuthorization;
+                Authorization.Journaling(userAuthorization);
+                _announcementsDeskNavigationService.Navigate();
             }
             else
             {
-                MessageBox.Show(_authorizationStore.ActualAuthorization.ErrorMassage);
-                if (!(_authorizationStore.ActualAuthorization.User is null)) Authorization.Journaling(_authorizationStore.ActualAuthorization);
+                MessageBox.Show(userAuthorization.ErrorMassage);
+                if (!(userAuthorization.User is null)) Authorization.Journaling(_authorizationStore.ActualAuthorization);
             }
         }
     }
