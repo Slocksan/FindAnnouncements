@@ -73,7 +73,10 @@
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegistrateCommand.cs" />
     <Compile Include="Commands\UpdateAnnouncementsCommand.cs" />
+    <Compile Include="Converters\ConverterEnumToDescription.cs" />
     <Compile Include="Enums\AnimalType.cs" />
+    <Compile Include="Enums\Genders.cs" />
+    <Compile Include="Enums\WorkWithEnumExtansion.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\EF\Role.cs" />
@@ -167,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="propChangedSnippet.snippet" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

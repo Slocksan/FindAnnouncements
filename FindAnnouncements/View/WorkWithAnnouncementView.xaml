@@ -5,17 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FindAnnouncements.View"
         xmlns:viewModels ="clr-namespace:FindAnnouncements.ViewModel"
+        xmlns:converters ="clr-namespace:FindAnnouncements.Converters"
         mc:Ignorable="d"
         Title="WorkWithAnnouncementView" Height="450" Width="400">
+    <Window.Resources>
+        <converters:ConverterEnumToDescription x:Key="ConverterEnumToDescription"/>
+    </Window.Resources>
     <StackPanel>
-        <Image Width="100" Height="100"/>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Имя:"/>
-            <TextBox Width="100" Height="20"/>
+        <StackPanel>
+            <Image Width="100" Height="100"/>
+            <Button Width="100" Height="20" Content="Загрузить фото" Command="{Binding LoadPhoto}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Label Content="Тип животного:"/>
-            <ComboBox Height="20" Width="100" ItemsSource="{Binding AnimalTypes}"/>
+            <Label Content="Имя:"/>
+            <TextBox Width="100" Height="20" Text="{Binding AnimalName}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Вид:"/>
+            <ComboBox Height="20" Width="100" ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Пол:"/>
+            <ComboBox Height="20" Width="100" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Чипирован:"/>
+            <CheckBox Height="20" Width="100" IsChecked="{Binding Chipped}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Где найден:"/>
+            <TextBox Height="50" Width="100" Text="{Binding Location}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Описание:"/>
+            <TextBox Height="50" Width="100" Text="{Binding Description}"/>
         </StackPanel>
     </StackPanel>
 </Window>

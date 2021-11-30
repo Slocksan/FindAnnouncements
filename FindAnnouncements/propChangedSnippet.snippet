@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>propChanged</Title>
+    <Author>Владимир Пономарев</Author>
+    <Shortcut>propchanged</Shortcut>
+    <Description>приватное поле, обернутое в get/set с отслеживанем изменений</Description>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>type</ID>
+        <Default>TYPE</Default>
+      </Literal>
+      <Literal>
+        <ID>fieldName</ID>
+        <Default>fieldName</Default>
+      </Literal>
+      <Literal>
+        <ID>propName</ID>
+        <Default>PropName</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="CSharp">
+      <![CDATA[private $type$ _$fieldName$;
+
+        public $type$ $PropName$
+        {
+            get
+            {
+                return _$fieldName$;
+            }
+            set
+            {
+                _$fieldName$ = value;
+                OnPropertyChanged(nameof($PropName$));
+            }
+        }]]>
+    </Code>
+  </Snippet>
+</CodeSnippet>
