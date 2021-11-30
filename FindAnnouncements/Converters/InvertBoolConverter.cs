@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 
-namespace FindAnnouncements.Resources
+namespace FindAnnouncements.Converters
 {
     [ValueConversion(typeof(bool), typeof(bool))]
     class InvertBoolToVisConverter : IValueConverter

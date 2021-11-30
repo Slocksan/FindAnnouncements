@@ -37,6 +37,7 @@ namespace FindAnnouncements.Commands
             {
                 _authorizationStore.ActualAuthorization = userAuthorization;
                 MessageBox.Show(userAuthorization.ErrorMessage);
+                Authorization.Journaling(userAuthorization.User, "Регистрация", "Зарегистрирован новый пользователь");
             }
             else
             {

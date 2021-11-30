@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\EditAnnouncementCommand.cs" />
+    <Compile Include="Commands\LoadPhotoCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegistrateCommand.cs" />

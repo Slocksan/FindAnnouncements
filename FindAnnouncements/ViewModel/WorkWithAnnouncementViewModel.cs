@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using FindAnnouncements.Commands;
 using FindAnnouncements.Enums;
 using Microsoft.Win32;
 using static FindAnnouncements.Enums.WorkWithEnumExtansion;
@@ -20,9 +22,9 @@ namespace FindAnnouncements.ViewModel
         public List<string> AnimalTypes { get;}
         public List<string> Genders { get;}
 
-        private BitmapImage _photo;
+        private byte[] _photo;
 
-        public BitmapImage Photo
+        public byte[] Photo
         {
             get
             {
@@ -110,9 +112,9 @@ namespace FindAnnouncements.ViewModel
             }
         }
 
-        private bool _chipped;
+        private bool? _chipped;
 
-        public bool Chipped
+        public bool? Chipped
         {
             get
             {
@@ -145,18 +147,19 @@ namespace FindAnnouncements.ViewModel
             _announcement = announcement;
             _user = user;
             AnimalTypes = GetListOfEnumsDescriptions<AnimalType>();
-            Genders = GetListOfEnumsDescriptions<AnimalType>();
+            Genders = GetListOfEnumsDescriptions<Gender>();
+
+            AnimalCategory = _announcement.AnimalCategory;
+            AnimalName = _announcement.AnimalName;
+            Gender = _announcement.Gender;
+            Chipped = _announcement.Chiped;
+            PublishTime = _announcement.PublishDate;
+            Location = _announcement.Location;
+            Description = _announcement.Discription;
+
+            LoadPhotoCommand = new LoadPhotoCommand(this);
         }
 
-        private void LoadPhoto(object sender, RoutedEventArgs e)
-        {
-            var op = new OpenFileDialog();
-            op.Title = "Выберите фото";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                        "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-                Photo = new BitmapImage(new Uri(op.FileName));
-        }
+        public ICommand LoadPhotoCommand { get; }
     }
 }

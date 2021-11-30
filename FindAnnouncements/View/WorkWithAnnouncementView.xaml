@@ -7,38 +7,41 @@
         xmlns:viewModels ="clr-namespace:FindAnnouncements.ViewModel"
         xmlns:converters ="clr-namespace:FindAnnouncements.Converters"
         mc:Ignorable="d"
-        Title="WorkWithAnnouncementView" Height="450" Width="400">
+        Title="Объявление" Height="750" Width="500" MaxHeight="750" MaxWidth="500" MinHeight="750" MinWidth="500">
     <Window.Resources>
         <converters:ConverterEnumToDescription x:Key="ConverterEnumToDescription"/>
     </Window.Resources>
-    <StackPanel>
+    <StackPanel Width="300">
         <StackPanel>
-            <Image Width="100" Height="100"/>
-            <Button Width="100" Height="20" Content="Загрузить фото" Command="{Binding LoadPhoto}"/>
+            <Image Width="200" Height="200" Source="{Binding Photo}" Margin="20"/>
+            <Button Margin="20" Width="100" Height="20" Content="Загрузить фото" Command="{Binding LoadPhotoCommand}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Label Content="Имя:"/>
-            <TextBox Width="100" Height="20" Text="{Binding AnimalName}"/>
+            <Label Width="100" Content="Имя:"/>
+            <TextBox Width="150" Height="20" Text="{Binding AnimalName}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Label Content="Вид:"/>
-            <ComboBox Height="20" Width="100" ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
+            <Label Width="100" Content="Вид:"/>
+            <ComboBox Height="20" Width="150" ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Label Content="Пол:"/>
-            <ComboBox Height="20" Width="100" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
+            <Label Width="100" Content="Пол:"/>
+            <ComboBox Height="20" Width="150" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Label Content="Чипирован:"/>
+            <Label Width="100" Content="Чипирован:"/>
             <CheckBox Height="20" Width="100" IsChecked="{Binding Chipped}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Где найден:"/>
-            <TextBox Height="50" Width="100" Text="{Binding Location}"/>
+        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+            <Label Width="100" Content="Где найден:"/>
+            <TextBox Height="100" Width="200" Text="{Binding Location}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Описание:"/>
-            <TextBox Height="50" Width="100" Text="{Binding Description}"/>
+        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+            <Label Width="100" Content="Описание:"/>
+            <TextBox Height="100" Width="200" Text="{Binding Description}"/>
+        </StackPanel>
+        <StackPanel>
+            <Button Margin="20" Width="150" Height="40" Content="Применить" FontSize="16"/>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -4,9 +4,132 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FindAnnouncements.View"
+             xmlns:converters="clr-namespace:FindAnnouncements.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <converters:InvertBoolToVisConverter x:Key="InvertBoolToVisConverter"/>
+    </UserControl.Resources>
     <Grid>
-        <Label FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center">My Announcements</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2.8*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" LastChildFill="False">
+                <Label Content="Сортировка" Height="40" FontSize="16" Margin="20 0 10 0" DockPanel.Dock="Left"/>
+                <ComboBox Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left">
+                    <ComboBoxItem Content="Дата находки позже"/>
+                    <ComboBoxItem Content="Дата находки раньше"/>
+                </ComboBox>
+                <Button DockPanel.Dock="Left" Height="30" Width="100" Content="Фильтры" FontSize="16" Margin="20 0 0 0"/>
+                <Button DockPanel.Dock="Right" Height="30" Width="100" Content="Обновить" FontSize="16" Margin="0 0 20 0" Command="{Binding UpdateAnnouncementsCommand}"/>
+            </DockPanel>
+            <DataGrid SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn CanUserResize="False" CanUserSort="False" 
+                                        CanUserReorder="False" 
+                                        Header="Имя" Width="175" 
+                                        Binding="{Binding AnimalName}"/>
+                    <DataGridTextColumn CanUserSort="False" 
+                                        CanUserResize ="False" 
+                                        CanUserReorder ="False" Header="Тип" Width="175" 
+                                        Binding="{Binding AnimalCategory}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock/>
+                <Button Grid.Column="0" Height="30" Width="200" Content="Доска объявлений" FontSize="16" Command="{Binding LoginCommand}" Visibility="{Binding AuthorizationStore.ActualAuthorization.IsAutorized, Converter={StaticResource InvertBoolToVisConverter}}"/>
+            </Grid>
+        </Grid>
+        <DockPanel Grid.Column="1" LastChildFill="False" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }" >
+            <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
+                   Height="40" DockPanel.Dock="Top"/>
+            <Image Margin="20" DockPanel.Dock="Top" Width="200" Height="200"/>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Имя:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.AnimalName, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Вид:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.AnimalCategory, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Пол:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.Gender, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Чипирован:" FontSize="16"/>
+                <CheckBox IsHitTestVisible="False" Focusable="False" IsChecked="{Binding Path=SelectedItem.Chiped, ElementName=AnnouncementsDataGrid}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Content="Дата публикации:" FontSize="16"/>
+                <Label Content="{Binding Path=SelectedItem.PublishDate, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
+            </StackPanel>
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Место нахождения:" FontSize="16" TextWrapping="Wrap" Margin="5 0 0 0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=SelectedItem.Location, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16" Margin="10"/>
+            </Grid>
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Описание:" FontSize="16"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=SelectedItem.Discription, ElementName=AnnouncementsDataGrid}" TextWrapping="Wrap" FontSize="16" Margin="10"/>
+            </Grid>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Height="30" Width="200" Content="Изменить объявление" FontSize="16">
+                    <Button.Style>
+                        <Style>
+                            <Setter Property="Control.IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid}" Value="false"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Control.IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Row="1" Height="30" Width="200" Content="Удалить объявление" FontSize="16">
+                    <Button.Style>
+                        <Style>
+                            <Setter Property="Control.IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid}" Value="false"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Control.IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Row="2" Height="30" Width="200" Content="Добавить объявление" FontSize="16"/>
+            </Grid>
+        </DockPanel>
     </Grid>
 </UserControl>
