@@ -57,13 +57,14 @@ namespace FindAnnouncements.Commands
             if (userAuthorization.IsAutorized)
             {
                 _authorizationStore.ActualAuthorization = userAuthorization;
-                Authorization.Journaling(userAuthorization);
+                Authorization.Journaling(userAuthorization.User, "Регистрация", "Пользователь авторизован");
                 _announcementsDeskNavigationService.Navigate();
             }
             else
             {
-                MessageBox.Show(userAuthorization.ErrorMassage);
-                if (!(userAuthorization.User is null)) Authorization.Journaling(_authorizationStore.ActualAuthorization);
+                MessageBox.Show(userAuthorization.ErrorMessage);
+                if (!(userAuthorization.User is null)) 
+                    Authorization.Journaling(userAuthorization.User, "Регистрация", userAuthorization.ErrorMessage);
             }
         }
     }

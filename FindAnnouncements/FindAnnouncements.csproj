@@ -81,7 +81,7 @@
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\EF\Role.cs" />
     <Compile Include="Models\EF\User.cs" />
-    <Compile Include="Resources\InvertBoolConverter.cs" />
+    <Compile Include="Converters\InvertBoolConverter.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\AuthorizationStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />

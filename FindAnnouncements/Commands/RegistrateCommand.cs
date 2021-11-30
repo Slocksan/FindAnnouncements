@@ -36,7 +36,7 @@ namespace FindAnnouncements.Commands
             if (userAuthorization.IsAutorized)
             {
                 _authorizationStore.ActualAuthorization = userAuthorization;
-                MessageBox.Show(userAuthorization.ErrorMassage);
+                MessageBox.Show(userAuthorization.ErrorMessage);
             }
             else
             {
