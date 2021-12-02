@@ -67,7 +67,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
+                <Button Grid.Column="2" Height="30" Width="150" Content="Мои объявления" FontSize="16" Command="{Binding OpenMyAnnouncementsCommand}" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
             </Grid>
         </Grid>
         <DockPanel Grid.Column="1" LastChildFill="False" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }" >

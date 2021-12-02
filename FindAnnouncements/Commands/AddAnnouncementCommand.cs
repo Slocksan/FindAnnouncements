@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -11,20 +10,21 @@ using FindAnnouncements.ViewModel;
 
 namespace FindAnnouncements.Commands
 {
-    class EditAnnouncementCommand : CommandBase
+    class AddAnnouncementCommand : CommandBase
     {
         private readonly User _user;
         public override void Execute(object parameter)
         {
-            var announcementToEdit = parameter as Announcement;
             var workWithAnnounWindow = new WorkWithAnnouncementView();
-            workWithAnnounWindow.DataContext = new WorkWithAnnouncementViewModel(announcementToEdit, _user);
+
+            var announcementToAdd = new Announcement();
+            workWithAnnounWindow.DataContext = new WorkWithAnnouncementViewModel(announcementToAdd, _user);
             workWithAnnounWindow.ShowDialog();
-            if (workWithAnnounWindow.DialogResult == true)
-                AnnouncementService.EditAnnouncement(announcementToEdit);
+            if(workWithAnnounWindow.DialogResult == true)
+                AnnouncementService.AddAnnouncement(announcementToAdd);
         }
 
-        public EditAnnouncementCommand(User user)
+        public AddAnnouncementCommand(User user)
         {
             _user = user;
         }

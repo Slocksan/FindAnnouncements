@@ -67,16 +67,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AddAnnouncementCommand.cs" />
+    <Compile Include="Commands\ApplyEditedAnnouncementCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\EditAnnouncementCommand.cs" />
     <Compile Include="Commands\LoadPhotoCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegistrateCommand.cs" />
-    <Compile Include="Commands\UpdateAnnouncementsCommand.cs" />
+    <Compile Include="Commands\UpdateAnnouncementsDeskCommand.cs" />
+    <Compile Include="Commands\UpdateMyAnnouncementsCommand.cs" />
     <Compile Include="Converters\ConverterEnumToDescription.cs" />
     <Compile Include="Enums\AnimalType.cs" />
     <Compile Include="Enums\Genders.cs" />
+    <Compile Include="Enums\WorkWithAnnouncementResult.cs" />
     <Compile Include="Enums\WorkWithEnumExtansion.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />

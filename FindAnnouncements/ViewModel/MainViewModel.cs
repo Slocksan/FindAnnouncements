@@ -49,7 +49,13 @@ namespace FindAnnouncements.ViewModel
 
         private AnnouncemetsDeskViewModel CreateAnnouncementsDeskViewModel()
         {
-            return new AnnouncemetsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateLoginViewModel));
+            return new AnnouncemetsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateLoginViewModel), new NavigationService(_navigationStore, CreateMyAnnouncementsViewModel));
+        }
+
+        private MyAnnouncementsViewModel CreateMyAnnouncementsViewModel()
+        {
+            return new MyAnnouncementsViewModel(_authorizationStore,
+                new NavigationService(_navigationStore, CreateAnnouncementsDeskViewModel));
         }
     }
 }

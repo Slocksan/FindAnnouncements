@@ -17,10 +17,25 @@ namespace FindAnnouncements.ViewModel
 {
     class WorkWithAnnouncementViewModel : BaseViewModel
     {
-        private readonly Announcement _announcement;
-        private readonly User _user;
+        public Announcement Announcement { get; }
+        public User User { get; }
         public List<string> AnimalTypes { get;}
         public List<string> Genders { get;}
+
+        private bool _dialogResult;
+
+        public bool DialogResult
+        {
+            get
+            {
+                return _dialogResult;
+            }
+            set
+            {
+                _dialogResult = value;
+                OnPropertyChanged(nameof(DialogResult));
+            }
+        }
 
         private byte[] _photo;
 
@@ -144,22 +159,24 @@ namespace FindAnnouncements.ViewModel
 
         public WorkWithAnnouncementViewModel(Announcement announcement, User user)
         {
-            _announcement = announcement;
-            _user = user;
+            Announcement = announcement;
+            User = user;
             AnimalTypes = GetListOfEnumsDescriptions<AnimalType>();
             Genders = GetListOfEnumsDescriptions<Gender>();
 
-            AnimalCategory = _announcement.AnimalCategory;
-            AnimalName = _announcement.AnimalName;
-            Gender = _announcement.Gender;
-            Chipped = _announcement.Chiped;
-            PublishTime = _announcement.PublishDate;
-            Location = _announcement.Location;
-            Description = _announcement.Discription;
+            AnimalCategory = Announcement.AnimalCategory;
+            AnimalName = Announcement.AnimalName;
+            Gender = Announcement.Gender;
+            Chipped = Announcement.Chiped;
+            PublishTime = Announcement.PublishDate;
+            Location = Announcement.Location;
+            Description = Announcement.Discription;
 
             LoadPhotoCommand = new LoadPhotoCommand(this);
+            ApplyCommand = new ApplyEditedAnnouncementCommand(this);
         }
 
         public ICommand LoadPhotoCommand { get; }
+        public ICommand ApplyCommand { get; }
     }
 }

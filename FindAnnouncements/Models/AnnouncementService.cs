@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace FindAnnouncements.Models
 {
@@ -18,13 +19,17 @@ namespace FindAnnouncements.Models
             }
         }
 
-        public static void EditAnnouncement(Announcement announcementToEdit, Announcement newAnnouncement)
+        public static void EditAnnouncement(Announcement announcementToEdit)
         {
             using (var context = new FindAnnouncementsModel())
             {
-                var announcement=context.Announcements.Find(announcementToEdit);
-                announcement = newAnnouncement;
-                context.SaveChanges();
+                var announcements = context.Announcements.Where(announ => announ.AnnounID == announcementToEdit.AnnounID);
+                if (announcements.Any())
+                {
+                    context.Announcements.Remove(announcements.First());
+                    context.Announcements.Add(announcementToEdit);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -38,13 +43,23 @@ namespace FindAnnouncements.Models
         }
 
 
-        public static List<Announcement> GetAllAnnouncements()
+        public static List<Announcement> GetAllAnnouncements<TOrderBy>(Expression<Func<Announcement, bool>> filter, Expression<Func<Announcement, TOrderBy>> sorter)
         {
             using (var context = new FindAnnouncementsModel())
             {
-                var AllAnnouncmentns = context.Announcements.ToList();
+                filter = e => true;
+                var AllAnnouncmentns = context.Announcements.Where(filter).OrderBy(sorter).ToList();
                 return AllAnnouncmentns;
             }
         }
+
+        public static List<Announcement> GetAllAnnouncements(Expression<Func<Announcement, bool>> filter)
+            => GetAllAnnouncements<DateTime>(filter, announcement => announcement.PublishDate);
+
+        public static List<Announcement> GetAllAnnouncements<TOrderBy>(Expression<Func<Announcement, TOrderBy>> sorter)
+            => GetAllAnnouncements<TOrderBy>(announcement => true, sorter);
+
+        public static List<Announcement> GetAllAnnouncements()
+            => GetAllAnnouncements<DateTime>(announcement => true, announcement => announcement.PublishDate);
     }
 }

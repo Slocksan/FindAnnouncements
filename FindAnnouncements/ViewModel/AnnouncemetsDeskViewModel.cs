@@ -51,13 +51,18 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand CreateAnnouncementCommand { get; }
 
-        public AnnouncemetsDeskViewModel(AuthorizationStore authorizationStore, NavigationService LoginNavigationService)
+        public ICommand OpenMyAnnouncementsCommand { get; }
+
+        public AnnouncemetsDeskViewModel(AuthorizationStore authorizationStore, NavigationService loginNavigationService, NavigationService myAnnouncementsNavigationService)
         {
-            UpdateAnnouncementsCommand = new UpdateAnnouncementsCommand(this);
-            LoginCommand = new NavigateCommand(LoginNavigationService);
+            Announcements = new List<Announcement>();
+
+            UpdateAnnouncementsCommand = new UpdateAnnouncementsDeskCommand(this);
+            LoginCommand = new NavigateCommand(loginNavigationService);
+            OpenMyAnnouncementsCommand = new NavigateCommand(myAnnouncementsNavigationService);
             AuthorizationStore = authorizationStore;
 
-            CreateAnnouncementCommand = new EditAnnouncementCommand(AuthorizationStore.ActualAuthorization.User);
+            CreateAnnouncementCommand = new AddAnnouncementCommand(AuthorizationStore.ActualAuthorization.User);
 
             UpdateAnnouncementsCommand.Execute(null);
         }
