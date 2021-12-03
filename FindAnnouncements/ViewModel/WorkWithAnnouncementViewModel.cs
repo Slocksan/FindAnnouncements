@@ -164,13 +164,15 @@ namespace FindAnnouncements.ViewModel
             AnimalTypes = GetListOfEnumsDescriptions<AnimalType>();
             Genders = GetListOfEnumsDescriptions<Gender>();
 
-            AnimalCategory = Announcement.AnimalCategory;
-            AnimalName = Announcement.AnimalName;
-            Gender = Announcement.Gender;
-            Chipped = Announcement.Chiped;
+
+            AnimalCategory = Announcement.AnimalCategory ?? "";
+            AnimalName = Announcement.AnimalName ?? "";
+            Gender = Announcement.Gender ?? "";
+            Photo = Announcement.Photo ?? Array.Empty<byte>();
+            Chipped = Announcement.Chiped ?? false;
             PublishTime = Announcement.PublishDate;
-            Location = Announcement.Location;
-            Description = Announcement.Discription;
+            Location = Announcement.Location ?? "";
+            Description = Announcement.Discription ?? "";
 
             LoadPhotoCommand = new LoadPhotoCommand(this);
             ApplyCommand = new ApplyEditedAnnouncementCommand(this);

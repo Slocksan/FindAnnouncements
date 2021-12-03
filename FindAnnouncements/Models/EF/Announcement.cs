@@ -48,5 +48,10 @@ namespace FindAnnouncements
         public int UserID { get; set; }
 
         public virtual User User { get; set; }
+
+        public Announcement()
+        {
+            PublishDate = DateTime.Now;
+        }
     }
 }

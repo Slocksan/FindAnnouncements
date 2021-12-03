@@ -49,7 +49,9 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand EditAnnouncementCommand { get; }
 
-        public ICommand AddAnnouncementCommand { get; }
+        public ICommand CreateAnnouncementCommand { get; }
+
+        public ICommand DeleteAnnouncementCommand { get; }
 
         public MyAnnouncementsViewModel(AuthorizationStore authorizationStore, NavigationService announcementsDeskNavigationService)
         {
@@ -58,8 +60,9 @@ namespace FindAnnouncements.ViewModel
 
             UpdateAnnouncementsCommand = new UpdateMyAnnouncementsCommand(this);
 
-            EditAnnouncementCommand = new EditAnnouncementCommand(authorizationStore.ActualAuthorization.User);
-            AddAnnouncementCommand = new EditAnnouncementCommand(authorizationStore.ActualAuthorization.User);
+            EditAnnouncementCommand = new EditAnnouncementCommand(authorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
+            CreateAnnouncementCommand = new AddAnnouncementCommand(authorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
+            DeleteAnnouncementCommand = new DeleteAnnouncementCommand(authorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
 
             OpenAnnouncementsDeskCommand = new NavigateCommand(announcementsDeskNavigationService);
 

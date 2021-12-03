@@ -62,7 +62,7 @@ namespace FindAnnouncements.ViewModel
             OpenMyAnnouncementsCommand = new NavigateCommand(myAnnouncementsNavigationService);
             AuthorizationStore = authorizationStore;
 
-            CreateAnnouncementCommand = new AddAnnouncementCommand(AuthorizationStore.ActualAuthorization.User);
+            CreateAnnouncementCommand = new AddAnnouncementCommand(AuthorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
 
             UpdateAnnouncementsCommand.Execute(null);
         }

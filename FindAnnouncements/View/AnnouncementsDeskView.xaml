@@ -73,7 +73,7 @@
         <DockPanel Grid.Column="1" LastChildFill="False" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }" >
             <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
                    Height="40" DockPanel.Dock="Top"/>
-            <Image Margin="20" DockPanel.Dock="Top"/>
+            <Image Margin="20" DockPanel.Dock="Top" Width="200" Height="200" Source="{Binding Path=SelectedItem.Photo, ElementName=AnnouncementsDataGrid}"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                 <Label Content="Имя:" FontSize="16"/>
                 <Label Content="{Binding Path=SelectedItem.AnimalName, ElementName=AnnouncementsDataGrid}" FontSize="16"/>

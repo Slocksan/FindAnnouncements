@@ -56,7 +56,7 @@
             <DockPanel DockPanel.Dock="Top" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }">
                 <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
                    Height="40" DockPanel.Dock="Top"/>
-                <Image Margin="20" DockPanel.Dock="Top" Width="200" Height="200"/>
+                <Image Margin="20" DockPanel.Dock="Top" Width="200" Height="200" Source="{Binding Path=SelectedItem.Photo, ElementName=AnnouncementsDataGrid}"/>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                     <Label Content="Имя:" FontSize="16"/>
                     <Label Content="{Binding Path=SelectedItem.AnimalName, ElementName=AnnouncementsDataGrid}" FontSize="16"/>
@@ -100,7 +100,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" Height="30" Width="200" Margin="0 0 0 20" Content="Изменить объявление" FontSize="16" Command="{Binding EditAnnouncementCommand}">
+                <Button Grid.Row="0" Height="30" Width="200" Margin="0 0 0 20" Content="Изменить объявление" FontSize="16" Command="{Binding EditAnnouncementCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=AnnouncementsDataGrid}">
                     <Button.Style>
                         <Style>
                             <Setter Property="Control.IsEnabled" Value="False"/>
@@ -115,7 +115,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Grid.Row="1" Height="30" Width="200" Margin="0 0 0 20" Content="Удалить объявление" FontSize="16">
+                <Button Grid.Row="1" Height="30" Width="200" Margin="0 0 0 20" Content="Удалить объявление" FontSize="16" Command="{Binding DeleteAnnouncementCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=AnnouncementsDataGrid}">
                     <Button.Style>
                         <Style>
                             <Setter Property="Control.IsEnabled" Value="False"/>
@@ -130,7 +130,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Grid.Row="2" Height="30" Width="200" Margin="0 0 0 20" Content="Добавить объявление" FontSize="16"/>
+                <Button Grid.Row="2" Height="30" Width="200" Margin="0 0 0 20" Content="Добавить объявление" FontSize="16" Command="{Binding CreateAnnouncementCommand}"/>
             </Grid>
         </DockPanel>
     </Grid>

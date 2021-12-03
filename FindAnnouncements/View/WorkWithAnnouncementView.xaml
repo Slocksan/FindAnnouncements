@@ -35,11 +35,11 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
             <Label Width="100" Content="Где найден:"/>
-            <TextBox Height="100" Width="200" Text="{Binding Location}"/>
+            <TextBox Height="100" Width="200" Text="{Binding Location}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
             <Label Width="100" Content="Описание:"/>
-            <TextBox Height="100" Width="200" Text="{Binding Description}"/>
+            <TextBox Height="100" Width="200" Text="{Binding Description}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
         <StackPanel>
             <Button Margin="20" Width="150" Height="40" Content="Применить" FontSize="16" Command="{Binding ApplyCommand}" CommandParameter="{Binding ElementName=Window}"/>

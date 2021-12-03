@@ -28,13 +28,9 @@ namespace FindAnnouncements.Commands
             _workWithAnnouncementViewModel.Announcement.Location = _workWithAnnouncementViewModel.Location;
             _workWithAnnouncementViewModel.Announcement.Photo = _workWithAnnouncementViewModel.Photo;
             _workWithAnnouncementViewModel.Announcement.Gender = _workWithAnnouncementViewModel.Gender;
-            
 
-            if (_workWithAnnouncementViewModel.Announcement.User == null)
-            {
-                _workWithAnnouncementViewModel.Announcement.PublishDate = DateTime.Now;
-                _workWithAnnouncementViewModel.Announcement.UserID = _workWithAnnouncementViewModel.User.UserID;
-            }
+            Trace.WriteLine(_workWithAnnouncementViewModel.Announcement.PublishDate);
+            _workWithAnnouncementViewModel.Announcement.UserID = _workWithAnnouncementViewModel.User.UserID;
 
             ((Window) parameter).DialogResult = true;
         }

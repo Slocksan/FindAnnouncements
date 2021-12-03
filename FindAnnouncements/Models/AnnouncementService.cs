@@ -23,10 +23,10 @@ namespace FindAnnouncements.Models
         {
             using (var context = new FindAnnouncementsModel())
             {
-                var announcements = context.Announcements.Where(announ => announ.AnnounID == announcementToEdit.AnnounID);
-                if (announcements.Any())
+                var announcement = context.Announcements.Find(announcementToEdit.AnnounID);
+                if (announcement != null)
                 {
-                    context.Announcements.Remove(announcements.First());
+                    context.Announcements.Remove(announcement);
                     context.Announcements.Add(announcementToEdit);
                     context.SaveChanges();
                 }
@@ -37,17 +37,19 @@ namespace FindAnnouncements.Models
         {
             using (var context = new FindAnnouncementsModel())
             {
-                context.Announcements.Remove(announcementToDelete);
-                context.SaveChanges();
+                var announcement = context.Announcements.Find(announcementToDelete.AnnounID);
+                if (announcement != null)
+                {
+                    context.Announcements.Remove(announcement);
+                    context.SaveChanges();
+                }
             }
         }
-
 
         public static List<Announcement> GetAllAnnouncements<TOrderBy>(Expression<Func<Announcement, bool>> filter, Expression<Func<Announcement, TOrderBy>> sorter)
         {
             using (var context = new FindAnnouncementsModel())
             {
-                filter = e => true;
                 var AllAnnouncmentns = context.Announcements.Where(filter).OrderBy(sorter).ToList();
                 return AllAnnouncmentns;
             }

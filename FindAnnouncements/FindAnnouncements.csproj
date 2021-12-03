@@ -70,6 +70,7 @@
     <Compile Include="Commands\AddAnnouncementCommand.cs" />
     <Compile Include="Commands\ApplyEditedAnnouncementCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\DeleteAnnouncementCommand.cs" />
     <Compile Include="Commands\EditAnnouncementCommand.cs" />
     <Compile Include="Commands\LoadPhotoCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
