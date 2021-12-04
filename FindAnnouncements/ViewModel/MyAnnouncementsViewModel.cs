@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
+using FindAnnouncements.Models;
 using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
@@ -13,6 +14,36 @@ namespace FindAnnouncements.ViewModel
     class MyAnnouncementsViewModel : BaseViewModel
     {
         public AuthorizationStore AuthorizationStore { get; }
+
+        private List<AnnouncementSorter> _announcementSorters;
+
+        public List<AnnouncementSorter> AnnouncementSorters
+        {
+            get
+            {
+                return _announcementSorters;
+            }
+            set
+            {
+                _announcementSorters = value;
+                OnPropertyChanged(nameof(AnnouncementSorters));
+            }
+        }
+
+        private AnnouncementSorter _selectedAnnouncementSorter;
+
+        public AnnouncementSorter SelectedAnnouncementSorter
+        {
+            get
+            {
+                return _selectedAnnouncementSorter;
+            }
+            set
+            {
+                _selectedAnnouncementSorter = value;
+                OnPropertyChanged(nameof(SelectedAnnouncementSorter));
+            }
+        }
 
         private Announcement _selectedAnnouncement;
         public Announcement SelectedAnnouncement
@@ -65,6 +96,16 @@ namespace FindAnnouncements.ViewModel
             DeleteAnnouncementCommand = new DeleteAnnouncementCommand(authorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
 
             OpenAnnouncementsDeskCommand = new NavigateCommand(announcementsDeskNavigationService);
+
+            AnnouncementSorters = new List<AnnouncementSorter>
+            {
+                new AnnouncementSorter<DateTime>("Дата находки раньше", announcement => announcement.PublishDate, false),
+                new AnnouncementSorter<DateTime>("Дата находки позже", announcement => announcement.PublishDate, true),
+                new AnnouncementSorter<string>("Имя животного", announcement => announcement.AnimalName, false),
+                new AnnouncementSorter<string>("Категория животного", announcement => announcement.AnimalCategory, false)
+            };
+
+            SelectedAnnouncementSorter = AnnouncementSorters[0];
 
             UpdateAnnouncementsCommand.Execute(null);
         }

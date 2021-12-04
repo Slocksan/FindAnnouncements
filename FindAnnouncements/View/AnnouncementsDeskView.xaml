@@ -25,23 +25,48 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" LastChildFill="False">
                 <Label Content="Сортировка" Height="40" FontSize="16" Margin="20 0 10 0" DockPanel.Dock="Left"/>
-                <ComboBox Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left">
-                    <ComboBoxItem Content="Дата находки позже"/>
-                    <ComboBoxItem Content="Дата находки раньше"/>
+                <ComboBox Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left" ItemsSource="{Binding AnnouncementSorters}" SelectedItem="{Binding SelectedAnnouncementSorter}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding SorterName}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button DockPanel.Dock="Left" Height="30" Width="100" Content="Фильтры" FontSize="16" Margin="20 0 0 0"/>
                 <Button DockPanel.Dock="Right" Height="30" Width="100" Content="Обновить" FontSize="16" Margin="0 0 20 0" Command="{Binding UpdateAnnouncementsCommand}"/>
             </DockPanel>
             <DataGrid SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Image" Width="*" CanUserResize ="False" CanUserSort="False" 
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Photo}" MaxHeight="150"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn CanUserResize="False" CanUserSort="False" 
                                         CanUserReorder="False" 
-                                        Header="Имя" Width="175" 
+                                        Header="Имя" Width="*" 
                                         Binding="{Binding AnimalName}"/>
                     <DataGridTextColumn CanUserSort="False" 
                                         CanUserResize ="False" 
-                                        CanUserReorder ="False" Header="Тип" Width="175" 
+                                        CanUserReorder ="False" Header="Тип" Width="*" 
                                         Binding="{Binding AnimalCategory}"/>
+                    <DataGridTextColumn CanUserSort="False" 
+                                        CanUserResize ="False" 
+                                        CanUserReorder ="False" Header="Пол" Width="*" 
+                                        Binding="{Binding Gender}"/>
+                    <DataGridTextColumn CanUserSort="False" 
+                                        CanUserResize ="False" 
+                                        CanUserReorder ="False" Header="Чип" Width="0.3*" 
+                                        Binding="{Binding Chipped}"/>
+                    <DataGridTextColumn CanUserSort="False" 
+                                        CanUserResize ="False" 
+                                        CanUserReorder ="False" Header="Дата публикации" Width="*" 
+                                        Binding="{Binding PublishDate}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="2" HorizontalAlignment="Stretch">

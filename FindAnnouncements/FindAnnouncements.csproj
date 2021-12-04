@@ -83,6 +83,7 @@
     <Compile Include="Enums\Genders.cs" />
     <Compile Include="Enums\WorkWithAnnouncementResult.cs" />
     <Compile Include="Enums\WorkWithEnumExtansion.cs" />
+    <Compile Include="Models\AnnouncementSorter.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />
     <Compile Include="Models\EF\Role.cs" />

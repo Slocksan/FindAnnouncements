@@ -17,7 +17,17 @@ namespace FindAnnouncements.Commands
 
         public override void Execute(object parameter)
         {
-            _announcemetsDeskViewModel.Announcements = AnnouncementService.GetAllAnnouncements();
+            var typeOfGeneric = _announcemetsDeskViewModel.SelectedAnnouncementSorter.GetTypeOfGeneric();
+            switch (typeOfGeneric.Name)
+            {
+                case "String":
+                    _announcemetsDeskViewModel.Announcements = AnnouncementService.GetAllAnnouncements(((AnnouncementSorter<string>)_announcemetsDeskViewModel.SelectedAnnouncementSorter).SorterExpression);
+                    break;
+                case "DateTime":
+                    _announcemetsDeskViewModel.Announcements = AnnouncementService.GetAllAnnouncements(((AnnouncementSorter<DateTime>)_announcemetsDeskViewModel.SelectedAnnouncementSorter).SorterExpression);
+                    break;
+            }
+            
         }
 
         public UpdateAnnouncementsDeskCommand(AnnouncemetsDeskViewModel announcemetsDeskViewModel)
