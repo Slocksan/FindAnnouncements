@@ -28,7 +28,7 @@ namespace FindAnnouncements
         public MainWindow()
         {
             InitializeComponent();
-            Trace.WriteLine(typeof(DateTime).Name);
+            AnnouncementService.GetAllAnnouncements("true", "PublishDate");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

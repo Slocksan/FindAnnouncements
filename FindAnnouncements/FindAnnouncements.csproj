@@ -47,6 +47,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.2.14.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.2.14\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -76,8 +79,7 @@
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegistrateCommand.cs" />
-    <Compile Include="Commands\UpdateAnnouncementsDeskCommand.cs" />
-    <Compile Include="Commands\UpdateMyAnnouncementsCommand.cs" />
+    <Compile Include="Commands\UpdateAnnouncementsCommand.cs" />
     <Compile Include="Converters\ConverterEnumToDescription.cs" />
     <Compile Include="Enums\AnimalType.cs" />
     <Compile Include="Enums\Genders.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Stores\AuthorizationStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModel\AnnouncemetsDeskViewModel.cs" />
+    <Compile Include="ViewModel\BaseAnnouncementDeskViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MyAnnouncementsViewModel.cs" />

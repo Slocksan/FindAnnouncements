@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FindAnnouncements.Models
 {
-    class Authorization
+    public class Authorization
     {
         public bool IsAutorized { get; set; }
         public User User { get; set; }

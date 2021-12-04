@@ -8,7 +8,7 @@ using FindAnnouncements.Models;
 
 namespace FindAnnouncements.Stores
 {
-    class AuthorizationStore
+    public class AuthorizationStore
     {
         private Authorization _actualAuthorization;
 

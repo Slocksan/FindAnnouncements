@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
 
 namespace FindAnnouncements.Models
 {
@@ -46,7 +48,7 @@ namespace FindAnnouncements.Models
             }
         }
 
-        public static List<Announcement> GetAllAnnouncements<TOrderBy>(Expression<Func<Announcement, bool>> filter, Expression<Func<Announcement, TOrderBy>> sorter)
+        public static List<Announcement> GetAllAnnouncements(string filter, string sorter)
         {
             using (var context = new FindAnnouncementsModel())
             {
@@ -55,13 +57,7 @@ namespace FindAnnouncements.Models
             }
         }
 
-        public static List<Announcement> GetAllAnnouncements(Expression<Func<Announcement, bool>> filter)
-            => GetAllAnnouncements<DateTime>(filter, announcement => announcement.PublishDate);
-
-        public static List<Announcement> GetAllAnnouncements<TOrderBy>(Expression<Func<Announcement, TOrderBy>> sorter)
-            => GetAllAnnouncements<TOrderBy>(announcement => true, sorter);
-
         public static List<Announcement> GetAllAnnouncements()
-            => GetAllAnnouncements<DateTime>(announcement => true, announcement => announcement.PublishDate);
+            => GetAllAnnouncements("true", "PublishDate");
     }
 }

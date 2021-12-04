@@ -11,69 +11,8 @@ using FindAnnouncements.Stores;
 
 namespace FindAnnouncements.ViewModel
 {
-    class MyAnnouncementsViewModel : BaseViewModel
+    class MyAnnouncementsViewModel : BaseAnnouncementDeskViewModel
     {
-        public AuthorizationStore AuthorizationStore { get; }
-
-        private List<AnnouncementSorter> _announcementSorters;
-
-        public List<AnnouncementSorter> AnnouncementSorters
-        {
-            get
-            {
-                return _announcementSorters;
-            }
-            set
-            {
-                _announcementSorters = value;
-                OnPropertyChanged(nameof(AnnouncementSorters));
-            }
-        }
-
-        private AnnouncementSorter _selectedAnnouncementSorter;
-
-        public AnnouncementSorter SelectedAnnouncementSorter
-        {
-            get
-            {
-                return _selectedAnnouncementSorter;
-            }
-            set
-            {
-                _selectedAnnouncementSorter = value;
-                OnPropertyChanged(nameof(SelectedAnnouncementSorter));
-            }
-        }
-
-        private Announcement _selectedAnnouncement;
-        public Announcement SelectedAnnouncement
-        {
-            get
-            {
-                return _selectedAnnouncement;
-            }
-            set
-            {
-                _selectedAnnouncement = value;
-                OnPropertyChanged(nameof(SelectedAnnouncement));
-            }
-        }
-
-        private List<Announcement> _announcements;
-
-        public List<Announcement> Announcements
-        {
-            get
-            {
-                return _announcements;
-            }
-            set
-            {
-                _announcements = value;
-                OnPropertyChanged(nameof(Announcements));
-            }
-        }
-
         public ICommand OpenAnnouncementsDeskCommand { get; }
 
         public ICommand UpdateAnnouncementsCommand { get; }
@@ -89,7 +28,7 @@ namespace FindAnnouncements.ViewModel
             AuthorizationStore = authorizationStore;
             Announcements = new List<Announcement>();
 
-            UpdateAnnouncementsCommand = new UpdateMyAnnouncementsCommand(this);
+            UpdateAnnouncementsCommand = new UpdateAnnouncementsCommand(this);
 
             EditAnnouncementCommand = new EditAnnouncementCommand(authorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
             CreateAnnouncementCommand = new AddAnnouncementCommand(authorizationStore.ActualAuthorization.User, UpdateAnnouncementsCommand);
@@ -99,11 +38,13 @@ namespace FindAnnouncements.ViewModel
 
             AnnouncementSorters = new List<AnnouncementSorter>
             {
-                new AnnouncementSorter<DateTime>("Дата находки раньше", announcement => announcement.PublishDate, false),
-                new AnnouncementSorter<DateTime>("Дата находки позже", announcement => announcement.PublishDate, true),
-                new AnnouncementSorter<string>("Имя животного", announcement => announcement.AnimalName, false),
-                new AnnouncementSorter<string>("Категория животного", announcement => announcement.AnimalCategory, false)
+                new AnnouncementSorter("Дата находки раньше", "PublishDate", false),
+                new AnnouncementSorter("Дата находки позже", "PublishDate", true),
+                new AnnouncementSorter("Имя животного", "AnimalName", false),
+                new AnnouncementSorter("Категория животного", "AnimalCategory", false)
             };
+
+            AnnouncementsFilter = $"UserId == {authorizationStore.ActualAuthorization.User.UserID}";
 
             SelectedAnnouncementSorter = AnnouncementSorters[0];
 

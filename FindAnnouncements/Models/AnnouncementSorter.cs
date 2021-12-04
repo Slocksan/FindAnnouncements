@@ -7,26 +7,19 @@ using System.Threading.Tasks;
 
 namespace FindAnnouncements.Models
 {
-    public abstract class AnnouncementSorter
-    {
-        public abstract Type GetTypeOfGeneric();
-    }
-
-    public class AnnouncementSorter<TOrderBy> : AnnouncementSorter
+    public class AnnouncementSorter
     {
         public string SorterName { get; set; }
 
-        public Expression<Func<Announcement, TOrderBy>> SorterExpression { get; set; }
+        public string SorterExpression { get; set; }
 
         public bool ByDescending { get; set; }
 
-        public AnnouncementSorter(string name, Expression<Func<Announcement, TOrderBy>> expression, bool byDescending)
+        public AnnouncementSorter(string name, string expression, bool byDescending)
         {
             SorterName = name;
             SorterExpression = expression;
             ByDescending = byDescending;
         }
-
-        public override Type GetTypeOfGeneric() => typeof(TOrderBy);
     }
 }
