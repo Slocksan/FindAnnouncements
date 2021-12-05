@@ -21,6 +21,8 @@ namespace FindAnnouncements.ViewModel
 
         public ICommand OpenMyAnnouncementsCommand { get; }
 
+        public ICommand AnnouncementsFilterCommand { get; }
+
         public AnnouncemetsDeskViewModel(AuthorizationStore authorizationStore, NavigationService loginNavigationService, NavigationService myAnnouncementsNavigationService)
         {
             Announcements = new List<Announcement>();
@@ -39,11 +41,13 @@ namespace FindAnnouncements.ViewModel
                 new AnnouncementSorter("Категория животного", "AnimalCategory", false)
             };
 
-            AnnouncementsFilter = "true";
+            AnnouncementsFilter = new AnnouncementFilter();
 
             SelectedAnnouncementSorter = AnnouncementSorters[0];
 
             UpdateAnnouncementsCommand = new UpdateAnnouncementsCommand(this);
+
+            AnnouncementsFilterCommand = new EditAnnouncementFilterCommand(this);
 
             UpdateAnnouncementsCommand.Execute(null);
         }

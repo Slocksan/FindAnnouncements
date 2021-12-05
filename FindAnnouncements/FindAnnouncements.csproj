@@ -71,10 +71,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\AddAnnouncementCommand.cs" />
+    <Compile Include="Commands\ApplyAnnouncementFilterCommand.cs" />
     <Compile Include="Commands\ApplyEditedAnnouncementCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\DeleteAnnouncementCommand.cs" />
     <Compile Include="Commands\EditAnnouncementCommand.cs" />
+    <Compile Include="Commands\EditAnnouncementFilterCommand.cs" />
     <Compile Include="Commands\LoadPhotoCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Enums\Genders.cs" />
     <Compile Include="Enums\WorkWithAnnouncementResult.cs" />
     <Compile Include="Enums\WorkWithEnumExtansion.cs" />
+    <Compile Include="Models\AnnouncementFilter.cs" />
     <Compile Include="Models\AnnouncementSorter.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
     <Compile Include="Models\Authorization.cs" />
@@ -97,12 +100,16 @@
     <Compile Include="ViewModel\AnnouncemetsDeskViewModel.cs" />
     <Compile Include="ViewModel\BaseAnnouncementDeskViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\EditAnnouncementFilterViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MyAnnouncementsViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\WorkWithAnnouncementViewModel.cs" />
     <Compile Include="View\AnnouncementsDeskView.xaml.cs">
       <DependentUpon>AnnouncementsDeskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditAnnouncementFilterView.xaml.cs">
+      <DependentUpon>EditAnnouncementFilterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -133,6 +140,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AnnouncementsDeskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditAnnouncementFilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

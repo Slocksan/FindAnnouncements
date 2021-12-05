@@ -22,6 +22,7 @@ namespace FindAnnouncements.ViewModel
         public ICommand CreateAnnouncementCommand { get; }
 
         public ICommand DeleteAnnouncementCommand { get; }
+        public ICommand AnnouncementsFilterCommand { get; }
 
         public MyAnnouncementsViewModel(AuthorizationStore authorizationStore, NavigationService announcementsDeskNavigationService)
         {
@@ -44,9 +45,11 @@ namespace FindAnnouncements.ViewModel
                 new AnnouncementSorter("Категория животного", "AnimalCategory", false)
             };
 
-            AnnouncementsFilter = $"UserId == {authorizationStore.ActualAuthorization.User.UserID}";
+            AnnouncementsFilter = new AnnouncementFilter {User = AuthorizationStore.ActualAuthorization.User};
 
             SelectedAnnouncementSorter = AnnouncementSorters[0];
+
+            AnnouncementsFilterCommand = new EditAnnouncementFilterCommand(this);
 
             UpdateAnnouncementsCommand.Execute(null);
         }

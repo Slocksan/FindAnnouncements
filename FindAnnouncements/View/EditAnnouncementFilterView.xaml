@@ -1,0 +1,34 @@
+﻿<Window x:Class="FindAnnouncements.View.EditAnnouncementFilterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FindAnnouncements.View"
+        mc:Ignorable="d"
+        Title="Фильтры" Name="Window" Height="320" Width="400" ResizeMode="NoResize">
+    <StackPanel Width="300">
+        <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+            <Label Width="100" Content="Вид:"/>
+            <ComboBox Height="20" Width="150" ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Width="100" Content="Пол:"/>
+            <ComboBox Height="20" Width="150" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
+        </StackPanel>
+        <StackPanel Width="200" Margin="0 30 0 0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Дата нахождения"/>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsUsedDateFilter}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Width="30" Content="С:"/>
+                <DatePicker Height="25" Width="150" SelectedDate="{Binding StartDate}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Width="30" Content="По:"/>
+                <DatePicker Height="25" Width="150" SelectedDate="{Binding EndDate}"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Width="120" Height="30" Content="Принять фильтр" Margin="0 20 0 0" Command="{Binding ApplyFiltersCommand}" CommandParameter="{Binding ElementName=Window}"/>
+    </StackPanel>
+</Window>

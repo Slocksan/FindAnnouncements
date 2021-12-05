@@ -17,7 +17,7 @@ namespace FindAnnouncements.Commands
         {
 
             _announcementDeskViewModel.Announcements = 
-                AnnouncementService.GetAllAnnouncements(_announcementDeskViewModel.AnnouncementsFilter,
+                AnnouncementService.GetAllAnnouncements(_announcementDeskViewModel.AnnouncementsFilter.FilterExpression,
                     _announcementDeskViewModel.SelectedAnnouncementSorter.SorterExpression);
         }
 

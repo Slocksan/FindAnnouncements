@@ -12,9 +12,9 @@ namespace FindAnnouncements.ViewModel
     {
         public AuthorizationStore AuthorizationStore { get; set; }
 
-        private string _announcementsFilter;
+        private AnnouncementFilter _announcementsFilter;
 
-        public string AnnouncementsFilter
+        public AnnouncementFilter AnnouncementsFilter
         {
             get
             {
