@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using FindAnnouncements.Commands;
-using FindAnnouncements.Models;
+﻿using FindAnnouncements.Models;
 using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
@@ -47,9 +40,9 @@ namespace FindAnnouncements.ViewModel
                 new NavigationService(_navigationStore, CreateAnnouncementsDeskViewModel));
         }
 
-        private AnnouncemetsDeskViewModel CreateAnnouncementsDeskViewModel()
+        private AnnouncementsDeskViewModel CreateAnnouncementsDeskViewModel()
         {
-            return new AnnouncemetsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateLoginViewModel), new NavigationService(_navigationStore, CreateMyAnnouncementsViewModel));
+            return new AnnouncementsDeskViewModel(_authorizationStore, new NavigationService(_navigationStore, CreateLoginViewModel), new NavigationService(_navigationStore, CreateMyAnnouncementsViewModel));
         }
 
         private MyAnnouncementsViewModel CreateMyAnnouncementsViewModel()

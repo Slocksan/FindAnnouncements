@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace FindAnnouncements.Enums
 {
-    public static class WorkWithEnumExtansion
+    public static class WorkWithEnumExtension
     {
         public static string GetEnumDecription(this Enum value)
         {

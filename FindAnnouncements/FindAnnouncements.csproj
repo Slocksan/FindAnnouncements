@@ -80,13 +80,12 @@
     <Compile Include="Commands\LoadPhotoCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\RegistrateCommand.cs" />
+    <Compile Include="Commands\RegistrationCommand.cs" />
     <Compile Include="Commands\UpdateAnnouncementsCommand.cs" />
     <Compile Include="Converters\ConverterEnumToDescription.cs" />
     <Compile Include="Enums\AnimalType.cs" />
     <Compile Include="Enums\Genders.cs" />
-    <Compile Include="Enums\WorkWithAnnouncementResult.cs" />
-    <Compile Include="Enums\WorkWithEnumExtansion.cs" />
+    <Compile Include="Enums\WorkWithEnumExtension.cs" />
     <Compile Include="Models\AnnouncementFilter.cs" />
     <Compile Include="Models\AnnouncementSorter.cs" />
     <Compile Include="Models\AnnouncementService.cs" />
@@ -97,7 +96,7 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\AuthorizationStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
-    <Compile Include="ViewModel\AnnouncemetsDeskViewModel.cs" />
+    <Compile Include="ViewModel\AnnouncementsDeskViewModel.cs" />
     <Compile Include="ViewModel\BaseAnnouncementDeskViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\EditAnnouncementFilterViewModel.cs" />

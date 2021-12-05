@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using FindAnnouncements.Commands;
-using FindAnnouncements.Models;
 using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
@@ -16,7 +9,6 @@ namespace FindAnnouncements.ViewModel
     {
 
         private string _username;
-
         public string Username
         {
             get
@@ -31,7 +23,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _password;
-
         public string Password
         {
             get
@@ -46,18 +37,14 @@ namespace FindAnnouncements.ViewModel
         }
 
         public ICommand LoginCommand { get; }
-
         public ICommand RegistrationCommand { get; }
-
         public ICommand GuestCommand { get; }
 
         public LoginViewModel(AuthorizationStore authorizationStore ,NavigationService registrationNavigationService,
             NavigationService announcementsDeskNavigationService)
         {
             RegistrationCommand = new NavigateCommand(registrationNavigationService);
-
             GuestCommand = new NavigateCommand(announcementsDeskNavigationService);
-
             LoginCommand = new LoginCommand(this, authorizationStore, announcementsDeskNavigationService);
         }
     }

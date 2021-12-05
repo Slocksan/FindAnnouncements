@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Enums;
 using FindAnnouncements.Models;
-using static FindAnnouncements.Enums.WorkWithEnumExtansion;
+using static FindAnnouncements.Enums.WorkWithEnumExtension;
 
 namespace FindAnnouncements.ViewModel
 {
     class EditAnnouncementFilterViewModel : BaseViewModel
     {
         public AnnouncementFilter AnnouncementFilter { get; }
-
         public List<string> AnimalTypes { get; }
         public List<string> Genders { get; }
 
         private string _animalCategory;
-
         public string AnimalCategory
         {
             get
@@ -34,7 +29,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _gender;
-
         public string Gender
         {
             get
@@ -49,7 +43,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private bool _isUsedDateFilter;
-
         public bool IsUsedDateFilter
         {
             get
@@ -64,7 +57,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private DateTime _startDate;
-
         public DateTime StartDate
         {
             get
@@ -79,7 +71,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private DateTime _endDate;
-
         public DateTime EndDate
         {
             get

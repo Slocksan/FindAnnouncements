@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FindAnnouncements.Services;
-using FindAnnouncements.Stores;
-using FindAnnouncements.ViewModel;
+﻿using FindAnnouncements.Services;
 
 namespace FindAnnouncements.Commands
 {

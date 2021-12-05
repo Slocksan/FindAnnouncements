@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using FindAnnouncements.Models;
 using FindAnnouncements.Services;
@@ -12,11 +7,20 @@ using FindAnnouncements.ViewModel;
 
 namespace FindAnnouncements.Commands
 {
-    class RegistrateCommand : CommandBase
+    class RegistrationCommand : CommandBase
     {
         private readonly AuthorizationStore _authorizationStore;
         private readonly RegistrationViewModel _registrationViewModel;
         private readonly NavigationService _announcementsDeskNavigationService;
+
+        public RegistrationCommand(AuthorizationStore authorizationStore, RegistrationViewModel registrationViewModel, NavigationService announcementsDeskNavigationService)
+        {
+            _authorizationStore = authorizationStore;
+            _registrationViewModel = registrationViewModel;
+            _announcementsDeskNavigationService = announcementsDeskNavigationService;
+
+            _registrationViewModel.PropertyChanged += RegistrationViewModelOnPropertyChanged;
+        }
 
         public override void Execute(object parameter)
         {
@@ -43,15 +47,6 @@ namespace FindAnnouncements.Commands
             {
                 _announcementsDeskNavigationService.Navigate();
             }
-        }
-
-        public RegistrateCommand(AuthorizationStore authorizationStore, RegistrationViewModel registrationViewModel, NavigationService announcementsDeskNavigationService)
-        {
-            _authorizationStore = authorizationStore;
-            _registrationViewModel = registrationViewModel;
-            _announcementsDeskNavigationService = announcementsDeskNavigationService;
-
-            _registrationViewModel.PropertyChanged += RegistrationViewModelOnPropertyChanged;
         }
 
         public override bool CanExecute(object parameter)

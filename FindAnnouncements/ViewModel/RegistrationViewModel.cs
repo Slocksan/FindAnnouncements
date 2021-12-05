@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using FindAnnouncements.Commands;
-using FindAnnouncements.Models;
 using FindAnnouncements.Services;
 using FindAnnouncements.Stores;
 
@@ -13,9 +7,7 @@ namespace FindAnnouncements.ViewModel
 {
     class RegistrationViewModel : BaseViewModel
     {
-
         private string _username;
-
         public string Username
         {
             get
@@ -30,7 +22,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _password;
-
         public string Password
         {
             get
@@ -45,7 +36,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _firstName;
-
         public string FirstName
         {
             get
@@ -60,7 +50,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _secondName;
-
         public string SecondName
         {
             get
@@ -75,7 +64,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _patronymic;
-
         public string Patronymic
         {
             get
@@ -90,7 +78,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _phoneNumber;
-
         public string PhoneNumber
         {
             get
@@ -105,7 +92,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _email;
-
         public string Email
         {
             get
@@ -120,19 +106,14 @@ namespace FindAnnouncements.ViewModel
         }
 
         public ICommand RegistrateCommand { get; }
-
         public ICommand LoginCommand { get; }
-
         public ICommand GuestCommand { get; }
 
         public RegistrationViewModel(AuthorizationStore authorizationStore, NavigationService loginNavigationService, NavigationService announcementsDeskNavigationService)
         {
-            RegistrateCommand = new RegistrateCommand(authorizationStore, this, announcementsDeskNavigationService);
-
+            RegistrateCommand = new RegistrationCommand(authorizationStore, this, announcementsDeskNavigationService);
             LoginCommand = new NavigateCommand(loginNavigationService);
-
             GuestCommand = new NavigateCommand(announcementsDeskNavigationService);
-
         }
     }
 }

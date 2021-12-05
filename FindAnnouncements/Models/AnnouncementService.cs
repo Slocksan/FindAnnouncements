@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using System.Linq.Dynamic;
 using System.Linq.Dynamic.Core;
 
 namespace FindAnnouncements.Models
@@ -52,8 +46,8 @@ namespace FindAnnouncements.Models
         {
             using (var context = new FindAnnouncementsModel())
             {
-                var AllAnnouncmentns = context.Announcements.Where(filter).OrderBy(sorter).ToList();
-                return AllAnnouncmentns;
+                var allAnnouncements = context.Announcements.Where(filter).OrderBy(sorter).ToList();
+                return allAnnouncements;
             }
         }
 

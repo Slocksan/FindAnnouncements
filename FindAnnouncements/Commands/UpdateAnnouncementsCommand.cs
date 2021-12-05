@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using FindAnnouncements.Models;
+﻿using FindAnnouncements.Models;
 using FindAnnouncements.ViewModel;
 
 namespace FindAnnouncements.Commands
 {
     class UpdateAnnouncementsCommand : CommandBase
     {
-        private readonly BaseAnnouncementDeskViewModel _announcementDeskViewModel;
+        private readonly BaseAnnouncementDeskViewModel _viewModel;
+
+        public UpdateAnnouncementsCommand(BaseAnnouncementDeskViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
 
         public override void Execute(object parameter)
         {
 
-            _announcementDeskViewModel.Announcements = 
-                AnnouncementService.GetAllAnnouncements(_announcementDeskViewModel.AnnouncementsFilter.FilterExpression,
-                    _announcementDeskViewModel.SelectedAnnouncementSorter.SorterExpression);
-        }
-
-        public UpdateAnnouncementsCommand(BaseAnnouncementDeskViewModel announcementDeskViewModel)
-        {
-            _announcementDeskViewModel = announcementDeskViewModel;
+            _viewModel.Announcements = 
+                AnnouncementService.GetAllAnnouncements(_viewModel.AnnouncementsFilter.FilterExpression,
+                    _viewModel.SelectedAnnouncementSorter.SorterExpression);
         }
     }
 }

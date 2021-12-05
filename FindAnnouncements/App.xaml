@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:FindAnnouncements.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <DataTemplate DataType="{x:Type viewModels:AnnouncemetsDeskViewModel}">
+         <DataTemplate DataType="{x:Type viewModels:AnnouncementsDeskViewModel}">
              <views:AnnouncementsDesk/>
          </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:MyAnnouncementsViewModel}">

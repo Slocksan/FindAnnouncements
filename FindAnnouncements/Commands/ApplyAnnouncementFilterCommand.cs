@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using FindAnnouncements.ViewModel;
 
 namespace FindAnnouncements.Commands
 {
     class ApplyAnnouncementFilterCommand : CommandBase
     {
-        private readonly EditAnnouncementFilterViewModel _editAnnouncementFilterViewModel;
+        private readonly EditAnnouncementFilterViewModel _viewModel;
+
+        public ApplyAnnouncementFilterCommand(EditAnnouncementFilterViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
 
         public override void Execute(object parameter)
         {
-            _editAnnouncementFilterViewModel.AnnouncementFilter.AnimalCategory =
-                _editAnnouncementFilterViewModel.AnimalCategory;
-            _editAnnouncementFilterViewModel.AnnouncementFilter.Gender = _editAnnouncementFilterViewModel.Gender;
-            _editAnnouncementFilterViewModel.AnnouncementFilter.IsUsedDateFilter =
-                _editAnnouncementFilterViewModel.IsUsedDateFilter;
-            _editAnnouncementFilterViewModel.AnnouncementFilter.StartDate = _editAnnouncementFilterViewModel.StartDate;
-            _editAnnouncementFilterViewModel.AnnouncementFilter.EndDate = _editAnnouncementFilterViewModel.EndDate;
+            _viewModel.AnnouncementFilter.AnimalCategory = _viewModel.AnimalCategory;
+            _viewModel.AnnouncementFilter.Gender = _viewModel.Gender;
+            _viewModel.AnnouncementFilter.IsUsedDateFilter = _viewModel.IsUsedDateFilter;
+            _viewModel.AnnouncementFilter.StartDate = _viewModel.StartDate;
+            _viewModel.AnnouncementFilter.EndDate = _viewModel.EndDate;
 
-            ((Window)parameter).DialogResult = true;
-        }
-
-        public ApplyAnnouncementFilterCommand(EditAnnouncementFilterViewModel editAnnouncementFilterViewModel)
-        {
-            _editAnnouncementFilterViewModel = editAnnouncementFilterViewModel;
+            if(parameter != null)
+                ((Window)parameter).DialogResult = true;
         }
     }
 }

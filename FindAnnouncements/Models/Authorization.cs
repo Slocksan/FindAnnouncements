@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FindAnnouncements.Models
 {
@@ -69,13 +66,16 @@ namespace FindAnnouncements.Models
 
         public static void Journaling(User user, string operation, string description)
         {
-            var log = new Log();
+            var log = new Log
+            {
+                UserID = user.UserID,
+                Date = DateTime.Now,
+                Operation = operation,
+                Description = description
+            };
+
             using (var context = new FindAnnouncementsModel())
             {
-                log.UserID = user.UserID;
-                log.Date = DateTime.Now;
-                log.Operation = operation;
-                log.Description = description;
                 context.Logs.Add(log);
                 context.SaveChanges();
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using FindAnnouncements.ViewModel;
 using Microsoft.Win32;
 
@@ -12,6 +7,11 @@ namespace FindAnnouncements.Commands
     class LoadPhotoCommand : CommandBase
     {
         private readonly WorkWithAnnouncementViewModel _viewModel;
+
+        public LoadPhotoCommand(WorkWithAnnouncementViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
 
         public override void Execute(object parameter)
         {
@@ -24,11 +24,6 @@ namespace FindAnnouncements.Commands
                 return;
             var fileName = openFileDialog.FileName;
             _viewModel.Photo = File.ReadAllBytes(fileName);
-        }
-
-        public LoadPhotoCommand(WorkWithAnnouncementViewModel viewModel)
-        {
-            _viewModel = viewModel;
         }
     }
 }

@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Enums;
-using Microsoft.Win32;
-using static FindAnnouncements.Enums.WorkWithEnumExtansion;
+using static FindAnnouncements.Enums.WorkWithEnumExtension;
 
 namespace FindAnnouncements.ViewModel
 {
@@ -23,7 +15,6 @@ namespace FindAnnouncements.ViewModel
         public List<string> Genders { get;}
 
         private bool _dialogResult;
-
         public bool DialogResult
         {
             get
@@ -38,7 +29,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private byte[] _photo;
-
         public byte[] Photo
         {
             get
@@ -53,7 +43,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _animalName;
-
         public string AnimalName
         {
             get
@@ -68,7 +57,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _description;
-
         public string Description
         {
             get
@@ -83,7 +71,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _location;
-
         public string Location
         {
             get
@@ -98,7 +85,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _animalCategory;
-
         public string AnimalCategory
         {
             get
@@ -113,7 +99,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private string _gender;
-
         public string Gender
         {
             get
@@ -128,7 +113,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private bool? _chipped;
-
         public bool? Chipped
         {
             get
@@ -143,7 +127,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private DateTime _publishTime;
-
         public DateTime PublishTime
         {
             get
@@ -156,6 +139,9 @@ namespace FindAnnouncements.ViewModel
                 OnPropertyChanged(nameof(PublishTime));
             }
         }
+
+        public ICommand LoadPhotoCommand { get; }
+        public ICommand ApplyCommand { get; }
 
         public WorkWithAnnouncementViewModel(Announcement announcement, User user)
         {
@@ -177,8 +163,5 @@ namespace FindAnnouncements.ViewModel
             LoadPhotoCommand = new LoadPhotoCommand(this);
             ApplyCommand = new ApplyEditedAnnouncementCommand(this);
         }
-
-        public ICommand LoadPhotoCommand { get; }
-        public ICommand ApplyCommand { get; }
     }
 }

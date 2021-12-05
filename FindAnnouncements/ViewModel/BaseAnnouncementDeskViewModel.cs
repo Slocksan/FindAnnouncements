@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FindAnnouncements.Models;
 using FindAnnouncements.Stores;
 
@@ -13,7 +9,6 @@ namespace FindAnnouncements.ViewModel
         public AuthorizationStore AuthorizationStore { get; set; }
 
         private AnnouncementFilter _announcementsFilter;
-
         public AnnouncementFilter AnnouncementsFilter
         {
             get
@@ -28,7 +23,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private List<AnnouncementSorter> _announcementSorters;
-
         public List<AnnouncementSorter> AnnouncementSorters
         {
             get
@@ -43,7 +37,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private AnnouncementSorter _selectedAnnouncementSorter;
-
         public AnnouncementSorter SelectedAnnouncementSorter
         {
             get
@@ -58,7 +51,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private Announcement _selectedAnnouncement;
-
         public Announcement SelectedAnnouncement
         {
             get
@@ -73,7 +65,6 @@ namespace FindAnnouncements.ViewModel
         }
 
         private List<Announcement> _announcements;
-
         public List<Announcement> Announcements
         {
             get
