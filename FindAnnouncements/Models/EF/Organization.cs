@@ -24,14 +24,15 @@ namespace FindAnnouncements
         [Column("Organization")]
         [Required]
         [StringLength(50)]
-        public string Organization1 { get; set; }
+        public string OrganizationName { get; set; }
 
         [Required]
         [StringLength(50)]
         public string City { get; set; }
 
+        [Column("Addres")]
         [StringLength(100)]
-        public string Addres { get; set; }
+        public string Address { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }

@@ -23,14 +23,9 @@ namespace FindAnnouncements
         [Column("Role")]
         [Required]
         [StringLength(50)]
-        public string Role1 { get; set; }
+        public string RoleName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
-
-        public override string ToString()
-        {
-            return Role1;
-        }
     }
 }
