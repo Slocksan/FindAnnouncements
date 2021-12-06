@@ -5,22 +5,50 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FindAnnouncements.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center">
+             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+    <StackPanel  VerticalAlignment="Center">
         <StackPanel Width="300" Height="300">
             <StackPanel HorizontalAlignment="Center">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Label FontSize="18">Логин:</Label>
-                    <TextBox Width="200" FontSize="18" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                        <Label  FontSize="14" Height="25">
+                            Логин
+                        </Label>
+                    <Border Width="275" Height="25"  CornerRadius="20" Background="White" >
+                        <TextBox BorderBrush="White"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Width="250" Height="25"
+                                 FontSize="18" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
-                    <Label FontSize="18">Пароль:</Label>
-                    <TextBox Width="200" FontSize="18" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 0 0 0">
+                    <Label FontSize="14">Пароль</Label>
+                    <Border Width="275" Height="25"  CornerRadius="20" Background="White">
+                        <TextBox                                                                
+                                 Width="250" FontSize="18"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
                 </StackPanel>
             </StackPanel>
-            <Button Width="200" Height="50" Content="Войти" Margin="50,20 50 0" FontSize="18" Command="{Binding LoginCommand}"/>
-            <Button Width="200" Height="50" Content="Зарегистрироваться" Margin="50,20 50 0" FontSize="18" Command="{Binding RegistrationCommand}"/>
+            <Border Width="150" Height="25" CornerRadius="20" Background="AliceBlue" Margin="0 15 0 0" >
+                <Button BorderThickness="0" 
+                        Width="150" Height="25" 
+                        Content="Войти" Background="Transparent"  
+                        FontSize="14" Command="{Binding LoginCommand}"/>
+            </Border>
+            <Border Width="150" Height="25" CornerRadius="20" Background="AliceBlue" Margin="0 15 0 0" >
+                <Button BorderThickness="0" 
+                        Width="150" Height="25" 
+                        Content="Зарегистрироваться" Background="Transparent"  
+                        FontSize="14"  Command="{Binding RegistrationCommand}"/>
+            </Border>
+            <Border Width="150" Height="25" CornerRadius="20" Background="AliceBlue" Margin="0 15 0 0" >
+                <Button BorderThickness="0" 
+                        Width="150" Height="25"  Background="Transparent"
+                        FontSize="14" Command="{Binding GuestCommand}">Продолжить как гость</Button>
+            </Border>
         </StackPanel>
-        <Button Width="200" Height="50" DockPanel.Dock="Bottom" FontSize="18" Command="{Binding GuestCommand}">Продолжить как гость</Button>
     </StackPanel>
 </UserControl>

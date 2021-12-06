@@ -6,6 +6,10 @@
              xmlns:viewModels="clr-namespace:FindAnnouncements.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
          <DataTemplate DataType="{x:Type viewModels:AnnouncementsDeskViewModel}">
              <views:AnnouncementsDesk/>
          </DataTemplate>
@@ -18,5 +22,6 @@
         <DataTemplate DataType="{x:Type viewModels:RegistrationViewModel}">
             <views:RegistrationView/>
         </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
