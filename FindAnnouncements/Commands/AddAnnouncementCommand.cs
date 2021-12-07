@@ -26,7 +26,7 @@ namespace FindAnnouncements.Commands
             if (workWithAnnouncementView.DialogResult == true)
             {
                 AnnouncementService.AddAnnouncement(announcementToAdd);
-                var addedAnnouncement = AnnouncementService.GetAllAnnouncements($"UserID == \"{_user.UserID}\"", "UserID").Last();
+                var addedAnnouncement = AnnouncementService.GetAnnouncements($"UserID == \"{_user.UserID}\"", "UserID").Last();
                 Authorization.Journaling(_user, "Добавление объявления", $"Объявление #{addedAnnouncement.AnnounID}");
                 _updateCommand.Execute(null);
             }

@@ -42,7 +42,7 @@ namespace FindAnnouncements.Models
             }
         }
 
-        public static List<Announcement> GetAllAnnouncements(string filter, string sorter)
+        public static List<Announcement> GetAnnouncements(string filter, string sorter)
         {
             using (var context = new FindAnnouncementsModel())
             {
@@ -52,6 +52,6 @@ namespace FindAnnouncements.Models
         }
 
         public static List<Announcement> GetAllAnnouncements()
-            => GetAllAnnouncements("true", "PublishDate");
+            => GetAnnouncements("true", "PublishDate");
     }
 }

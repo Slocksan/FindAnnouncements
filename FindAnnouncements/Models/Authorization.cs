@@ -63,7 +63,6 @@ namespace FindAnnouncements.Models
             return authorization;
         }
 
-
         public static void Journaling(User user, string operation, string description)
         {
             var log = new Log
