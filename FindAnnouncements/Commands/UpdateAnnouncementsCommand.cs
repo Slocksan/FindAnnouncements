@@ -16,7 +16,7 @@ namespace FindAnnouncements.Commands
         {
 
             _viewModel.Announcements = 
-                AnnouncementService.GetAllAnnouncements(_viewModel.AnnouncementsFilter.FilterExpression,
+                AnnouncementService.GetAnnouncements(_viewModel.AnnouncementsFilter.FilterExpression,
                     _viewModel.SelectedAnnouncementSorter.SorterExpression);
         }
     }
