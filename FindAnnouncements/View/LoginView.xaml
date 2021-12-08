@@ -6,49 +6,32 @@
              xmlns:local="clr-namespace:FindAnnouncements.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+
     <StackPanel  VerticalAlignment="Center">
         <StackPanel Width="300" Height="300">
             <StackPanel HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
-                        <Label  FontSize="14" Height="25">
-                            Логин
-                        </Label>
-                    <Border Width="275" Height="25"  CornerRadius="20" Background="White" >
-                        <TextBox BorderBrush="White"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Width="250" Height="25"
-                                 FontSize="18" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Border>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 0 0 0">
-                    <Label FontSize="14">Пароль</Label>
-                    <Border Width="275" Height="25"  CornerRadius="20" Background="White">
-                        <TextBox                                                                
-                                 Width="250" FontSize="18"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Border>
-                </StackPanel>
+                        <TextBox Name ="Логин"
+                                 Width="250" 
+                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource AuthTextBox}"/>
+                
+                        <TextBox Name="Пароль"
+                                 Width="250" 
+                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource AuthTextBox}"/>
             </StackPanel>
-            <Border Width="150" Height="25" CornerRadius="20" Background="AliceBlue" Margin="0 15 0 0" >
-                <Button BorderThickness="0" 
-                        Width="150" Height="25" 
-                        Content="Войти" Background="Transparent"  
+                <Button Width="150" Height="25"
+                    Content="Войти" Background="Transparent"
+                        Style="{StaticResource AuthBtn}"
                         FontSize="14" Command="{Binding LoginCommand}"/>
-            </Border>
-            <Border Width="150" Height="25" CornerRadius="20" Background="AliceBlue" Margin="0 15 0 0" >
-                <Button BorderThickness="0" 
-                        Width="150" Height="25" 
-                        Content="Зарегистрироваться" Background="Transparent"  
+            
+                <Button Width="150" Height="25" 
+                    Style="{StaticResource AuthBtn}"
+                        Content="Зарегистрироваться" 
                         FontSize="14"  Command="{Binding RegistrationCommand}"/>
-            </Border>
-            <Border Width="150" Height="25" CornerRadius="20" Background="AliceBlue" Margin="0 15 0 0" >
-                <Button BorderThickness="0" 
-                        Width="150" Height="25"  Background="Transparent"
-                        FontSize="14" Command="{Binding GuestCommand}">Продолжить как гость</Button>
-            </Border>
+                <Button Width="150" Height="25"
+                        Style="{StaticResource AuthBtn}"                        
+                        FontSize="13" Command="{Binding GuestCommand}" Content="Продолжить как гость"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
