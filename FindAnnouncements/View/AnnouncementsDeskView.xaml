@@ -14,18 +14,20 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="2.8*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="0.15*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="151*"/>
+                <RowDefinition Height="4*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" LastChildFill="False">
                 <Label Content="Сортировка" Height="40" FontSize="16" Margin="20 0 10 0" DockPanel.Dock="Left"/>
-                <ComboBox Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left" ItemsSource="{Binding AnnouncementSorters}" SelectedItem="{Binding SelectedAnnouncementSorter}">
+                <ComboBox  Height="25" Width="200" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left" ItemsSource="{Binding AnnouncementSorters}" SelectedItem="{Binding SelectedAnnouncementSorter}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -37,9 +39,10 @@
                 <Button DockPanel.Dock="Left" Content="Фильтры" FontSize="16" Width="100" Height="25" Style="{StaticResource AuthBtn}" Command="{Binding AnnouncementsFilterCommand}"/>
                 <Button DockPanel.Dock="Right" Height="25" Width="100" Content="Обновить" FontSize="16" Style="{StaticResource AuthBtn}" Command="{Binding UpdateAnnouncementsCommand}"/>
             </DockPanel>
-            <DataGrid SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" Name="AnnouncementsDataGrid" Grid.Row="1" Margin="20,0,0,0" AutoGenerateColumns="False" ItemsSource="{Binding Announcements}">
+            <DataGrid SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" Name="AnnouncementsDataGrid" Grid.Row="1" Margin="5,0,0,0"
+                      AutoGenerateColumns="False" ItemsSource="{Binding Announcements}" Grid.RowSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Image" Width="*" CanUserResize ="False" CanUserSort="False" 
+                    <DataGridTemplateColumn Header="Изображение" Width="*" CanUserResize ="False" CanUserSort="False" 
                                             IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -61,25 +64,41 @@
                                         Binding="{Binding Gender}"/>
                     <DataGridTextColumn CanUserSort="False" 
                                         CanUserResize ="False" 
-                                        CanUserReorder ="False" Header="Чип" Width="0.3*" 
+                                        CanUserReorder ="False" Header="Чип" Width="0.5*" 
                                         Binding="{Binding Chipped}"/>
                     <DataGridTextColumn CanUserSort="False" 
                                         CanUserResize ="False" 
                                         CanUserReorder ="False" Header="Дата публикации" Width="*" 
                                         Binding="{Binding PublishDate}"/>
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="AntiqueWhite"/>
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="AliceBlue"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
             </DataGrid>
-            <Grid Grid.Row="2" HorizontalAlignment="Stretch">
+            <Grid Grid.Row="3" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock/>
                 <Button Grid.Column="0" Height="25" Width="100" Style="{StaticResource AuthBtn}" Content="Войти" FontSize="16" Command="{Binding LoginCommand}" Visibility="{Binding AuthorizationStore.ActualAuthorization.IsAutorized, Converter={StaticResource InvertBoolToVisConverter}}"/>
                 <Button Grid.Column="1" Height="25" Width="200"  Content="Добавить объявление" FontSize="16" Command="{Binding CreateAnnouncementCommand}" CommandParameter="{Binding SelectedItem, ElementName=AnnouncementsDataGrid}">
                     <Button.Style>
-                        <Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource AuthBtn }">
                             <Setter Property="Control.IsEnabled" Value="False"/>
                             <Style.Triggers>
                                 <MultiDataTrigger>
@@ -95,8 +114,8 @@
                 <Button Grid.Column="2" Height="25" Style="{StaticResource AuthBtn}" Width="150" Content="Мои объявления" FontSize="16" Command="{Binding OpenMyAnnouncementsCommand}" IsEnabled="{Binding AuthorizationStore.ActualAuthorization.IsAutorized}"/>
             </Grid>
         </Grid>
-        
-        <DockPanel   Grid.Column="1" LastChildFill="False" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }" >
+
+        <DockPanel  Grid.Column="2" LastChildFill="False" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }" >
             <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
                    Height="40" DockPanel.Dock="Top"/>
             <Image Margin="20" DockPanel.Dock="Top" Width="200" Height="200" Source="{Binding Path=SelectedItem.Photo, ElementName=AnnouncementsDataGrid}"/>

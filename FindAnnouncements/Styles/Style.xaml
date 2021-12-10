@@ -29,7 +29,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
-                                HorizontalAlignment="Center" CornerRadius="20" Background="LawnGreen">
+                                HorizontalAlignment="Center" CornerRadius="20" Background="#d9a40a">
                             <ContentPresenter HorizontalAlignment="Center" Content="{TemplateBinding Content}"></ContentPresenter>
                         </Border>
                     </ControlTemplate>
@@ -42,7 +42,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
-                                HorizontalAlignment="Center" CornerRadius="20" Background="#cbe87c">
+                                HorizontalAlignment="Center" CornerRadius="20" Background="#9f7f0a">
                                 <ContentPresenter HorizontalAlignment="Center" Content="{TemplateBinding Content}"></ContentPresenter>
                             </Border>
                         </ControlTemplate>
@@ -56,7 +56,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
-                                HorizontalAlignment="Center" CornerRadius="20" Background="LightGreen">
+                                HorizontalAlignment="Center" CornerRadius="20" Background="#ff7f0a">
                                 <ContentPresenter HorizontalAlignment="Center" Content="{TemplateBinding Content}"></ContentPresenter>
                         </Border>
                     </ControlTemplate>
@@ -64,5 +64,31 @@
             </Setter>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type ComboBox}" x:Key="Combo">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="20" Background="Black">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type DataGrid}">
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Background" Value="AntiqueWhite"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Style>
+            <Style TargetType="{x:Type DataGridCell}">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="AliceBlue"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
     </Style>
 </ResourceDictionary>
