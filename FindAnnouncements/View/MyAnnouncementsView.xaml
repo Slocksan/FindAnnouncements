@@ -12,11 +12,17 @@
         <converters:InvertBoolToVisConverter x:Key="InvertBoolToVisConverter"/>
     </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="655*"/>
+            <RowDefinition/>
+            <RowDefinition Height="144*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5.2*"/>
+            <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition Width="2.8*"/>
         </Grid.ColumnDefinitions>
-        <Grid Column="0">
+        <Grid Column="0" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
@@ -24,7 +30,7 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" LastChildFill="False">
                 <Label Content="Сортировка" Height="40" FontSize="16" Margin="20 0 10 0" DockPanel.Dock="Left"/>
-                <ComboBox Width="200" Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left" ItemsSource="{Binding AnnouncementSorters}" SelectedItem="{Binding SelectedAnnouncementSorter}">
+                <ComboBox Style="{StaticResource Combo}" Width="200" Height="30" SelectedIndex="0" FontSize="16" DockPanel.Dock="Left" ItemsSource="{Binding AnnouncementSorters}" SelectedItem="{Binding SelectedAnnouncementSorter}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -67,6 +73,22 @@
                                         CanUserReorder ="False" Header="Дата публикации" Width="*" 
                                         Binding="{Binding PublishDate}"/>
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="AntiqueWhite"/>
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="AliceBlue"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
             </DataGrid>
             <Grid Grid.Row="2" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -77,7 +99,7 @@
                 <Button Style="{StaticResource AuthBtn}" Grid.Column="0" Height="30" Width="200" Content="Доска объявлений" FontSize="16" Command="{Binding OpenAnnouncementsDeskCommand}"/>
             </Grid>
         </Grid>
-        <DockPanel Grid.Column="1" LastChildFill="False">
+        <DockPanel Grid.Column="2" LastChildFill="False" Grid.RowSpan="3">
             <DockPanel DockPanel.Dock="Top" Visibility="{Binding SelectedItems.IsEmpty, ElementName=AnnouncementsDataGrid, Converter={StaticResource InvertBoolToVisConverter} }">
                 <Label Content="Карточка:" FontSize="20" HorizontalAlignment="Center"
                    Height="40" DockPanel.Dock="Top"/>

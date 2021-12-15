@@ -24,5 +24,10 @@ namespace FindAnnouncements.View
         {
             InitializeComponent();
         }
+
+        private void Имя_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

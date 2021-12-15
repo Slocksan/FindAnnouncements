@@ -8,39 +8,22 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:converters ="clr-namespace:FindAnnouncements.Converters"
         mc:Ignorable="d"
-        Title="Объявление" Name="Window" Height="750" Width="500" MaxHeight="750" MaxWidth="500" MinHeight="750" MinWidth="500">
+        Title="Объявление" Name="Window"  Width="500" MaxHeight="750" MaxWidth="500" Height="1500" MinWidth="500"  Background="Bisque">
     <Window.Resources>
         <converters:ConverterEnumToDescription x:Key="ConverterEnumToDescription"/>
     </Window.Resources>
-    <StackPanel Width="300">
-        <StackPanel>
+    <StackPanel Width="500" >
             <Image Width="200" Height="200" Source="{Binding Photo}" Margin="20"/>
-            <Button Margin="20" Width="100" Height="20" Content="Загрузить фото" Command="{Binding LoadPhotoCommand}"/>
+            <Button Style="{StaticResource AuthBtn}" Margin="20" Width="100" Height="20" Content="Загрузить фото" Command="{Binding LoadPhotoCommand}"/>
+            <TextBox HorizontalAlignment="Center" Name="Имя" Style="{StaticResource RegTextBox}"  Text="{Binding AnimalName}"/>
+            <ComboBox Name="Вид" Style="{StaticResource EditCombo}"  ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
+            <ComboBox Name="Пол" Style="{StaticResource EditCombo}"  ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Width="100" FontSize="14" Content="Чипирован:"/>
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding Chipped}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Width="100" Content="Имя:"/>
-            <TextBox Width="150" Height="20" Text="{Binding AnimalName}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Width="100" Content="Вид:"/>
-            <ComboBox Height="20" Width="150" ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Width="100" Content="Пол:"/>
-            <ComboBox Height="20" Width="150" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Width="100" Content="Чипирован:"/>
-            <CheckBox Height="20" Width="100" IsChecked="{Binding Chipped}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-            <Label Width="100" Content="Где найден:"/>
-            <TextBox Height="100" Width="200" Text="{Binding Location}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-            <Label Width="100" Content="Описание:"/>
-            <TextBox Height="100" Width="200" Text="{Binding Description}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-        </StackPanel>
+        <TextBox Name="Местонахождения" Style="{StaticResource TextArea}"  Text="{Binding Location}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+            <TextBox Name="Описание" Style="{StaticResource TextArea}" Text="{Binding Description}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         <StackPanel>
             <Button Margin="20" Width="150" Height="40" Content="Применить" FontSize="16" Command="{Binding ApplyCommand}" CommandParameter="{Binding ElementName=Window}"/>
         </StackPanel>
