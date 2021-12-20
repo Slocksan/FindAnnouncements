@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FindAnnouncements.View"
+        xmlns:converters="clr-namespace:FindAnnouncements.Converters"
         mc:Ignorable="d"
         Title="Фильтры" Name="Window" Height="320" Width="400" ResizeMode="NoResize" Background="Bisque">
+    <Window.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Window.Resources>
     <StackPanel Width="300">
         <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
             <Label Width="100" Content="Вид:"/>
@@ -22,11 +26,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Width="30" Content="С:"/>
-                <DatePicker Height="25" Width="150" SelectedDate="{Binding StartDate}"/>
+                <DatePicker Height="25" Width="150" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Width="30" Content="По:"/>
-                <DatePicker Height="25" Width="150" SelectedDate="{Binding EndDate}"/>
+                <DatePicker Height="25" Width="150" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </StackPanel>
         <Button Style="{StaticResource AuthBtn}"  Width="120" Height="25" Content="Принять фильтр" Margin="0 20 0 0" Command="{Binding ApplyFiltersCommand}" CommandParameter="{Binding ElementName=Window}"/>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using FindAnnouncements.ViewModel;
 
 namespace FindAnnouncements.Commands
@@ -10,6 +11,7 @@ namespace FindAnnouncements.Commands
         public ApplyAnnouncementFilterCommand(EditAnnouncementFilterViewModel viewModel)
         {
             _viewModel = viewModel;
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
         }
 
         public override void Execute(object parameter)
@@ -22,6 +24,16 @@ namespace FindAnnouncements.Commands
 
             if(parameter != null)
                 ((Window)parameter).DialogResult = true;
+        }
+
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnCanExecutedChanged();
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !_viewModel.HasErrors;
         }
     }
 }

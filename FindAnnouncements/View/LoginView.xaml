@@ -13,11 +13,13 @@
                         <TextBox Name ="Логин"
                                  Width="250" 
                                  Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="50"
                                  Style="{StaticResource AuthTextBox}"/>
                 
                         <TextBox Name="Пароль"
                                  Width="250" 
                                  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="50"
                                  Style="{StaticResource AuthTextBox}"/>
             </StackPanel>
                 <Button Width="150" Height="25"

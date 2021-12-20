@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using FindAnnouncements.Commands;
 using FindAnnouncements.Enums;
@@ -8,7 +11,7 @@ using static FindAnnouncements.Enums.WorkWithEnumExtension;
 
 namespace FindAnnouncements.ViewModel
 {
-    class EditAnnouncementFilterViewModel : BaseViewModel
+    class EditAnnouncementFilterViewModel : BaseViewModel, INotifyDataErrorInfo
     {
         public AnnouncementFilter AnnouncementFilter { get; }
         public List<string> AnimalTypes { get; }
@@ -66,6 +69,20 @@ namespace FindAnnouncements.ViewModel
             set
             {
                 _startDate = value;
+
+                _propertyNameToErrorsDictionary.Remove(nameof(StartDate));
+                _propertyNameToErrorsDictionary.Remove(nameof(EndDate));
+
+                if (EndDate < StartDate)
+                {
+                    var startDateErrors = new List<string>()
+                    {
+                        "Начало временого интервала не может быть позже конца"
+                    };
+                    _propertyNameToErrorsDictionary.Add(nameof(StartDate), startDateErrors);
+                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(StartDate)));
+                }
+
                 OnPropertyChanged(nameof(StartDate));
             }
         }
@@ -80,6 +97,20 @@ namespace FindAnnouncements.ViewModel
             set
             {
                 _endDate = value;
+
+                _propertyNameToErrorsDictionary.Remove(nameof(StartDate));
+                _propertyNameToErrorsDictionary.Remove(nameof(EndDate));
+
+                if (EndDate < StartDate)
+                {
+                    var endDateErrors = new List<string>()
+                    {
+                        "Конец временого интервала не может быть раньше начала"
+                    };
+                    _propertyNameToErrorsDictionary.Add(nameof(EndDate), endDateErrors);
+                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(EndDate)));
+                }
+
                 OnPropertyChanged(nameof(EndDate));
             }
         }
@@ -87,6 +118,8 @@ namespace FindAnnouncements.ViewModel
         public ICommand ApplyFiltersCommand { get; }
         public EditAnnouncementFilterViewModel(AnnouncementFilter announcementFilter)
         {
+            _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
+
             AnnouncementFilter = announcementFilter;
             AnimalCategory = announcementFilter.AnimalCategory;
             Gender = announcementFilter.Gender;
@@ -102,5 +135,17 @@ namespace FindAnnouncements.ViewModel
 
             ApplyFiltersCommand = new ApplyAnnouncementFilterCommand(this);
         }
+
+        private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            _propertyNameToErrorsDictionary.TryGetValue(propertyName, out var errors);
+            return errors ?? new List<string>();
+        }
+
+        public bool HasErrors => _propertyNameToErrorsDictionary.Any();
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
     }
 }

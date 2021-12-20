@@ -9,13 +9,13 @@
     <StackPanel  VerticalAlignment="Center">
         <StackPanel Width="400" >
             <StackPanel HorizontalAlignment="Center">
-                <TextBox Name="Логин" Style="{StaticResource RegTextBox}" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox x:Name="Пароль" Style="{StaticResource RegTextBox}"  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Name="Имя" Style="{StaticResource RegTextBox}" Text="{Binding FirstName}" TextChanged="Имя_TextChanged"/>
-                <TextBox x:Name="Фамилия" Style="{StaticResource RegTextBox}"  Text="{Binding SecondName}"/>
-                <TextBox Name="Отчество" Style="{StaticResource RegTextBox}"  Text="{Binding Patronymic}"/>
-                <TextBox Name="Телефон" Style="{StaticResource RegTextBox}" Text="{Binding PhoneNumber}"/>
-                <TextBox Name="Почта" Style ="{StaticResource RegTextBox}" Text="{Binding Email}"/>
+                <TextBox Name="Логин" MaxLength="50" Style="{StaticResource RegTextBox}" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="Пароль" MaxLength="50" Style="{StaticResource RegTextBox}"  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="Имя" MaxLength="30" Style="{StaticResource RegTextBox}" Text="{Binding FirstName}" TextChanged="Имя_TextChanged"/>
+                <TextBox x:Name="Фамилия" MaxLength="30" Style="{StaticResource RegTextBox}"  Text="{Binding SecondName}"/>
+                <TextBox Name="Отчество" MaxLength="30" Style="{StaticResource RegTextBox}"  Text="{Binding Patronymic}"/>
+                <TextBox Name="Телефон" MaxLength="20" Style="{StaticResource RegTextBox}" Text="{Binding PhoneNumber}"/>
+                <TextBox Name="Почта" MaxLength="50"  Style ="{StaticResource RegTextBox}" Text="{Binding Email}"/>
             </StackPanel>
             <Button Style="{StaticResource AuthBtn}" Width="200" Height="25" Content="Зарегистрироваться" Margin="50,20 50 0" FontSize="14" Command="{Binding RegistrateCommand}"/>
             <Button Style="{StaticResource AuthBtn}" Width="200" Height="25" Content="Я уже зарегистрирован" Margin="50,20 50 0" FontSize="14" Command="{Binding LoginCommand}"/>

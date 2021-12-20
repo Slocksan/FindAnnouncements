@@ -8,24 +8,24 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:converters ="clr-namespace:FindAnnouncements.Converters"
         mc:Ignorable="d"
-        Title="Объявление" Name="Window"  Width="500" MaxHeight="750" MaxWidth="500" Height="1500" MinWidth="500"  Background="Bisque">
+        Title="Объявление" Name="Window"  Width="500" MaxHeight="850" MaxWidth="600" Height="850" MinWidth="500"  Background="Bisque">
     <Window.Resources>
         <converters:ConverterEnumToDescription x:Key="ConverterEnumToDescription"/>
     </Window.Resources>
     <StackPanel Width="500" >
             <Image Width="200" Height="200" Source="{Binding Photo}" Margin="20"/>
             <Button Style="{StaticResource AuthBtn}" Margin="20" Width="100" Height="20" Content="Загрузить фото" Command="{Binding LoadPhotoCommand}"/>
-            <TextBox HorizontalAlignment="Center" Name="Имя" Style="{StaticResource RegTextBox}"  Text="{Binding AnimalName}"/>
+            <TextBox HorizontalAlignment="Center" Name="Имя" Style="{StaticResource RegTextBox}"  Text="{Binding AnimalName}" MaxLength="30"/>
             <ComboBox Name="Вид" Style="{StaticResource EditCombo}"  ItemsSource="{Binding AnimalTypes}" SelectedItem="{Binding AnimalCategory}"/>
             <ComboBox Name="Пол" Style="{StaticResource EditCombo}"  ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Width="100" FontSize="14" Content="Чипирован:"/>
             <CheckBox VerticalAlignment="Center" IsChecked="{Binding Chipped}"/>
         </StackPanel>
-        <TextBox Name="Местонахождения" Style="{StaticResource TextArea}"  Text="{Binding Location}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-            <TextBox Name="Описание" Style="{StaticResource TextArea}" Text="{Binding Description}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+        <TextBox Name="Местонахождения" Style="{StaticResource TextArea}"  Text="{Binding Location}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" MaxLength="100"/>
+            <TextBox Name="Описание" Style="{StaticResource TextArea}" Text="{Binding Description}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" MaxLength="200"/>
         <StackPanel>
-            <Button Margin="20" Width="150" Height="40" Content="Применить" FontSize="16" Command="{Binding ApplyCommand}" CommandParameter="{Binding ElementName=Window}"/>
+            <Button Style="{StaticResource AuthBtn}" Margin="20" Width="150" Height="40" Content="Применить" FontSize="16" Command="{Binding ApplyCommand}" CommandParameter="{Binding ElementName=Window}"/>
         </StackPanel>
     </StackPanel>
 </Window>
